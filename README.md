@@ -44,6 +44,38 @@ git push
 
 ---
 
+## Editing with Claude Code
+
+The fastest way to make changes is to use **Claude Code**, Anthropic's AI coding assistant, which can edit the deck for you via chat.
+
+### Setup (one time)
+
+1. Install Claude Code: [claude.ai/code](https://claude.ai/code)
+2. Clone this repo to your computer:
+   ```bash
+   git clone https://github.com/events-willpower/willpowerworldofsports.git
+   cd willpowerworldofsports
+   ```
+3. Open Claude Code in that folder
+
+### Making edits
+
+1. Open Claude Code in the `willpowerworldofsports` folder
+2. Describe the change you want in plain English, for example:
+   - *"Change the headline on the Overview page to..."*
+   - *"Add Nike to the Iconic tier on The Community page"*
+   - *"Update the sponsorship pricing on the Sponsorship page"*
+3. Claude Code will edit `world-of-sports-2026.html` for you
+4. Push the changes live:
+   ```bash
+   git add world-of-sports-2026.html
+   git commit -m "describe your change"
+   git push
+   ```
+5. The live site updates automatically within ~30 seconds
+
+---
+
 ## Adding collaborators
 
 GitHub: **Settings → Collaborators → Add people** (invite by email or username)
