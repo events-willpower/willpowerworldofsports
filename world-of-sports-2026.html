@@ -646,8 +646,13 @@
       height: 100%; box-sizing: border-box; display: flex; flex-direction: column; }
     .p6__body { display: flex; gap: 40px; margin-top: 44px; align-items: stretch; justify-content: space-between; flex: 1; min-height: 0; }
     /* ── Pit board rows ── */
-    .ros { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
-    .ros-pages { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+    /* align-self:flex-start so this column hugs its own content height instead of
+       stretching to match the taller film carousel — otherwise .ros-pages (which
+       has no in-flow content to size from, since its children are all absolutely
+       positioned for the crossfade) inherits that extra height as dead space
+       between the last schedule row and the toggle button below it. */
+    .ros { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px; align-self: flex-start; }
+    .ros-pages { position: relative; height: 366px; overflow: hidden; }
     .ros-page {
       position: absolute; inset: 0; display: flex; flex-direction: column; gap: 5px;
       opacity: 0; transform: translateX(24px); pointer-events: none;
