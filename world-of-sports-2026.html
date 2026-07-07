@@ -598,6 +598,7 @@
     .p4-car-track { display: flex; align-items: center; gap: 0; width: max-content; }
     .p4-logo-item { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; margin: 0 26px; flex-shrink: 0; }
     .p4-car-logo { display: block; height: 28px; width: 72px; object-fit: contain; opacity: .8; filter: brightness(0) invert(1); }
+    .p4-car-logo[src*="gstatic"] { filter: grayscale(1) invert(1); }
     .p4-logo-name { font-family: var(--cond); font-size: 6.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.3); white-space: nowrap; line-height: 1; }
     .p4-car-logo:hover { opacity: 1; }
     .p4-car-row--iconic    .p4-car-track { animation: marquee 34s linear infinite; }
