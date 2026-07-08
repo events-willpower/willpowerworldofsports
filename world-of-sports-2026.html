@@ -760,6 +760,18 @@
     .ef-anchor__logo { height: 16px; width: auto; max-width: 50px; object-fit: contain; filter: brightness(0) invert(1); opacity: .7; }
     .ef-anchor__logo[src*="gstatic"] { filter: none; border-radius: 4px; opacity: .85; }
     .ef-anchor__logo--inv { filter: invert(1) brightness(2) !important; }
+    /* ── Logo carousel ── */
+    .ef-logo-carousel { overflow: hidden; width: 100%; margin-top: 4px; }
+    .ef-logo-track {
+      display: flex; align-items: center; gap: 18px;
+      width: max-content;
+      animation: ef-scroll 10s linear infinite;
+    }
+    .ef-logo-track:hover { animation-play-state: paused; }
+    @keyframes ef-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
     /* ── Track sections ── */
     .ef-section { display: flex; gap: 0; flex-shrink: 0; }
     .ef-section__vtag {
@@ -1706,11 +1718,18 @@
         <div class="ef-anchor__body">
           <span class="ef-anchor__time">10:00 AM</span>
           <span class="ef-anchor__name">Community Warm-Up</span>
-          <div class="ef-anchor__logos">
-            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
-            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://hyperice.com&size=64" alt="Hyperice">
-            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.equinox.com&size=64" alt="Equinox">
-            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nutrabolt.com&size=64" alt="Nutrabolt">
+          <div class="ef-logo-carousel">
+            <div class="ef-logo-track">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://hyperice.com&size=64" alt="Hyperice">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.equinox.com&size=64" alt="Equinox">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nutrabolt.com&size=64" alt="Nutrabolt">
+              <!-- duplicate for seamless loop -->
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://hyperice.com&size=64" alt="Hyperice">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.equinox.com&size=64" alt="Equinox">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nutrabolt.com&size=64" alt="Nutrabolt">
+            </div>
           </div>
         </div>
         <span class="ef-anchor__icon">🏃</span>
@@ -1764,13 +1783,22 @@
         <div class="ef-anchor__body">
           <span class="ef-anchor__time">1:00 PM</span>
           <span class="ef-anchor__name">Padel w/ The Pros &amp; Lunch</span>
-          <div class="ef-anchor__logos">
-            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.lovb.com&size=64" alt="LOVB">
-            <span style="font-family:var(--cond);font-size:8px;font-weight:800;letter-spacing:.06em;color:rgba(255,255,255,.75);white-space:nowrap;">TEXAS RANCHERS</span>
-            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
-            <img class="ef-anchor__logo ef-anchor__logo--inv" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124022/willpower/logos/brand-cadillac-f1-logo.png" alt="Cadillac">
-            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://texassports.com&size=64" alt="Longhorns">
-            <img class="ef-anchor__logo" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124129/willpower/logos/brand-formula1-logo.svg" alt="F1">
+          <div class="ef-logo-carousel">
+            <div class="ef-logo-track">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.lovb.com&size=64" alt="LOVB">
+              <span style="font-family:var(--cond);font-size:8px;font-weight:800;letter-spacing:.06em;color:rgba(255,255,255,.75);white-space:nowrap;">TEXAS RANCHERS</span>
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
+              <img class="ef-anchor__logo ef-anchor__logo--inv" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124022/willpower/logos/brand-cadillac-f1-logo.png" alt="Cadillac">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://texassports.com&size=64" alt="Longhorns">
+              <img class="ef-anchor__logo" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124129/willpower/logos/brand-formula1-logo.svg" alt="F1">
+              <!-- duplicate for seamless loop -->
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.lovb.com&size=64" alt="LOVB">
+              <span style="font-family:var(--cond);font-size:8px;font-weight:800;letter-spacing:.06em;color:rgba(255,255,255,.75);white-space:nowrap;">TEXAS RANCHERS</span>
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
+              <img class="ef-anchor__logo ef-anchor__logo--inv" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124022/willpower/logos/brand-cadillac-f1-logo.png" alt="Cadillac">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://texassports.com&size=64" alt="Longhorns">
+              <img class="ef-anchor__logo" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124129/willpower/logos/brand-formula1-logo.svg" alt="F1">
+            </div>
           </div>
         </div>
         <span class="ef-anchor__icon">🥎</span>
@@ -1819,13 +1847,22 @@
       </div>
 
       <!-- ANCHOR 3: Padel & Chill -->
-      <div class="ef-anchor ef-anchor--chill">
-        <img class="ef-chill-logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://hyperice.com&size=64" alt="Hyperice">
+      <div class="ef-anchor">
+        <span class="ef-anchor__icon">🥎</span>
         <div class="ef-anchor__body">
           <span class="ef-anchor__time">4:00 PM</span>
           <span class="ef-anchor__name">Padel &amp; Chill</span>
+          <div class="ef-logo-carousel">
+            <div class="ef-logo-track">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://hyperice.com&size=64" alt="Hyperice">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.plunge.com&size=64" alt="Plunge">
+              <!-- duplicate -->
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://hyperice.com&size=64" alt="Hyperice">
+              <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.plunge.com&size=64" alt="Plunge">
+            </div>
+          </div>
         </div>
-        <img class="ef-chill-logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.plunge.com&size=64" alt="Plunge">
+        <span class="ef-anchor__icon">🥎</span>
       </div>
 
     </div>
