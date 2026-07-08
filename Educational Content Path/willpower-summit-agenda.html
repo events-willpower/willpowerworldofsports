@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Race Command — WP Summit Operations Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:   #030408;
+    --ink2:  #06070f;
+    --red:   #dc0000;
+    --red-hi: #ff2020;
+    --gold:  #e8c96b;
+    --gold-dim: rgba(232,201,107,.1);
+    --green: #3dd68c;
+    --green-dim: rgba(61,214,140,.1);
+    --blue:  #6aadff;
+    --blue-dim: rgba(106,173,255,.1);
+    --border: rgba(255,255,255,.06);
+    --text:  rgba(255,255,255,.9);
+    --muted: rgba(255,255,255,.32);
+    --faint: rgba(255,255,255,.05);
+  }
+
+  html {
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    background-image:
+      repeating-linear-gradient(0deg,  rgba(255,255,255,.016) 0, rgba(255,255,255,.016) 1px, transparent 1px, transparent 52px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.016) 0, rgba(255,255,255,.016) 1px, transparent 1px, transparent 52px);
+  }
+  body { min-height: 100vh; }
+
+  /* Red accent bar at very top */
+  body::before {
+    content: '';
+    display: block; height: 3px;
+    background: linear-gradient(90deg, var(--red) 0%, rgba(220,0,0,.5) 55%, transparent 100%);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; overflow: hidden;
+    padding: 52px 48px 48px;
+    background:
+      radial-gradient(ellipse at 8% 85%, rgba(120,0,20,.5) 0%, transparent 48%),
+      radial-gradient(ellipse at 88% 12%, rgba(50,8,8,.55) 0%, transparent 50%),
+      linear-gradient(150deg, #06081a 0%, #0f050a 55%, #040409 100%);
+    border-bottom: 1px solid rgba(255,255,255,.04);
+  }
+
+  /* Austin circuit trace */
+  .hero-circuit {
+    position: absolute; inset: 0; pointer-events: none;
+    display: flex; align-items: center; justify-content: flex-end;
+    opacity: .05; padding-right: 40px;
+  }
+
+  .hero-inner { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; }
+
+  /* CONFIDENTIAL stamp — top right */
+  .hero-stamp {
+    position: absolute; top: 0; right: 0; z-index: 2;
+    text-align: right;
+    border-left: 1px solid rgba(220,0,0,.2);
+    border-bottom: 1px solid rgba(220,0,0,.2);
+    padding: 10px 16px 12px;
+    background: rgba(220,0,0,.03);
+    backdrop-filter: blur(4px);
+  }
+  .hero-stamp-line {
+    display: block; font-size: 7.5px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase;
+    line-height: 2; color: rgba(220,0,0,.55);
+  }
+  .hero-stamp-line.conf {
+    color: var(--red); font-size: 8.5px; letter-spacing: .28em;
+    border-top: 1px solid rgba(220,0,0,.25); margin-top: 4px; padding-top: 5px;
+  }
+
+  .hero-eyebrow {
+    font-size: 9px; font-weight: 800; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 22px; height: 2px; background: var(--red); flex-shrink: 0; }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(68px, 11.5vw, 128px);
+    letter-spacing: .03em; line-height: .86;
+    color: #fff; margin-bottom: 0;
+  }
+  .hero-title .dim { color: rgba(255,255,255,.15); }
+
+  .hero-subtitle {
+    font-size: 10px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--muted); margin: 10px 0 28px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-subtitle::before { content: ''; display: inline-block; width: 1px; height: 14px; background: rgba(220,0,0,.6); }
+
+  /* Hero data grid */
+  .hero-meta {
+    display: flex; width: fit-content;
+    border: 1px solid rgba(255,255,255,.07); border-radius: 3px; overflow: hidden;
+    margin-bottom: 18px;
+  }
+  .hm-item {
+    padding: 8px 14px; border-right: 1px solid rgba(255,255,255,.07);
+  }
+  .hm-item:last-child { border-right: none; }
+  .hm-label { font-size: 7px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
+  .hm-val   { font-size: 11px; font-weight: 700; letter-spacing: .06em; color: rgba(255,255,255,.75); }
+
+  .hero-featured {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(220,0,0,.08); border: 1px solid rgba(220,0,0,.22);
+    border-radius: 2px; padding: 5px 11px;
+    font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--red);
+  }
+  .hero-featured::before { content: ''; display: inline-block; width: 5px; height: 5px; background: var(--red); transform: rotate(45deg); }
+
+  /* ── TELEMETRY BAR ── */
+  .telem-bar {
+    background: var(--ink2);
+    border-bottom: 1px solid rgba(255,255,255,.04);
+    padding: 0 48px;
+  }
+  .telem-inner { max-width: 960px; margin: 0 auto; display: flex; }
+  .telem-item {
+    flex: 1; padding: 11px 14px;
+    border-right: 1px solid rgba(255,255,255,.05);
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .telem-item:last-child { border-right: none; }
+  .telem-label { font-size: 7px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+  .telem-val   { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: .06em; color: #fff; line-height: 1; }
+  .telem-item.t-status .telem-val { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: .18em; color: var(--green); }
+
+  /* ── SCHEDULE WRAPPER ── */
+  .schedule { max-width: 960px; margin: 0 auto; padding: 48px 48px 80px; position: relative; }
+
+  /* ── SECTOR DIVIDER ── */
+  .sector-div {
+    display: flex; align-items: center; gap: 14px;
+    margin: 32px 0 18px;
+  }
+  .sector-div:first-child { margin-top: 0; }
+  .sector-div-line { flex: 1; height: 1px; background: rgba(255,255,255,.05); }
+  .sector-div-text {
+    font-size: 8px; font-weight: 800; letter-spacing: .3em; text-transform: uppercase;
+    color: rgba(220,0,0,.65); white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sector-div-text::before, .sector-div-text::after {
+    content: ''; display: inline-block;
+    width: 4px; height: 4px; background: var(--red);
+    transform: rotate(45deg); opacity: .6;
+  }
+
+  /* ── SESSION ROW ── */
+  .session { display: grid; grid-template-columns: 78px 1fr; gap: 0 26px; margin-bottom: 4px; position: relative; }
+
+  /* Red racing line */
+  .session:not(:last-child) .session-time::after {
+    content: ''; position: absolute;
+    left: 76px; top: 25px; bottom: -4px; width: 2px;
+    background: linear-gradient(to bottom, rgba(220,0,0,.55) 0%, rgba(220,0,0,.1) 100%);
+  }
+
+  .session-time {
+    position: relative; padding-top: 16px;
+    font-size: 10px; font-weight: 800; letter-spacing: .06em;
+    color: var(--muted); text-align: right; line-height: 1.3;
+    font-variant-numeric: tabular-nums;
+  }
+  .session-time .end { font-weight: 400; opacity: .45; display: block; margin-top: 2px; font-size: 9px; }
+
+  /* Timeline dot — red */
+  .session-time::before {
+    content: ''; position: absolute;
+    right: -31px; top: 19px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--red);
+    border: 2px solid var(--ink);
+    box-shadow: 0 0 0 1px rgba(220,0,0,.35), 0 0 10px rgba(220,0,0,.35);
+    z-index: 2;
+  }
+  .session:has(.session-card--break) .session-time::before {
+    background: rgba(255,255,255,.15); border-color: rgba(255,255,255,.1);
+    box-shadow: none;
+  }
+  .session:has(.session-card--featured) .session-time::before {
+    width: 10px; height: 10px; right: -32px; top: 18px;
+    box-shadow: 0 0 0 2px rgba(220,0,0,.25), 0 0 18px rgba(220,0,0,.55);
+  }
+
+  /* ── SESSION CARD ── */
+  .session-card {
+    border-radius: 3px; border: 1px solid var(--border);
+    margin-bottom: 6px; background: rgba(8,10,22,.72);
+    overflow: hidden; transition: border-color .18s;
+    position: relative;
+  }
+  /* Left-edge accent bar */
+  .session-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; width: 2px; height: 100%;
+    background: transparent; transition: background .2s;
+    z-index: 1;
+  }
+  .session-card:hover { border-color: rgba(255,255,255,.1); }
+  .session-card:hover::before { background: rgba(220,0,0,.35); }
+
+  .session-card--featured {
+    background: rgba(14,7,14,.9);
+    border-color: rgba(220,0,0,.2);
+    box-shadow: 0 0 48px rgba(220,0,0,.07), inset 0 0 32px rgba(220,0,0,.03);
+  }
+  .session-card--featured::before { background: var(--red) !important; }
+
+  .session-card--break { background: transparent; border-color: rgba(255,255,255,.04); }
+  .session-card--break::before { display: none; }
+
+  /* ── CARD HEADER ── */
+  .card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 13px 15px; cursor: pointer; user-select: none;
+  }
+  .card-header:hover .more-btn { color: rgba(255,255,255,.55); }
+  .card-header-left { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+
+  /* Badges */
+  .session-badge {
+    display: inline-flex; align-items: center;
+    font-size: 7.5px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
+    border-radius: 2px; padding: 3px 7px; white-space: nowrap; flex-shrink: 0;
+  }
+  .badge-keynote  { background: rgba(220,0,0,.1);   color: #ff3333; border: 1px solid rgba(220,0,0,.25); }
+  .badge-panel    { background: rgba(255,255,255,.04); color: rgba(255,255,255,.45); border: 1px solid rgba(255,255,255,.09); }
+  .badge-break    { background: var(--green-dim);   color: var(--green); border: 1px solid rgba(61,214,140,.18); }
+  .badge-reception{ background: var(--green-dim);   color: var(--green); border: 1px solid rgba(61,214,140,.18); }
+  .badge-dinner   { background: var(--gold-dim);    color: var(--gold);  border: 1px solid rgba(232,201,107,.2); }
+  .badge-welcome  { background: var(--faint); color: var(--muted); border: 1px solid rgba(255,255,255,.06); }
+
+  .session-title { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: .06em; line-height: 1.05; color: #fff; }
+  .session-card--featured .session-title { font-size: 19px; }
+  .session-card--break .session-title { font-size: 15px; color: rgba(255,255,255,.5); }
+
+  .more-btn {
+    display: flex; align-items: center; gap: 5px; flex-shrink: 0;
+    font-size: 9px; font-weight: 800; color: var(--muted); letter-spacing: .12em; text-transform: uppercase;
+    transition: color .18s; white-space: nowrap;
+    background: none; border: none; padding: 0; cursor: pointer;
+    font-family: inherit; outline: none; -webkit-appearance: none;
+  }
+  .more-btn svg { transition: transform .25s; flex-shrink: 0; }
+  .session-card.open .more-btn svg { transform: rotate(180deg); }
+  .session-card.open .more-btn { color: var(--red); }
+  .session-card--break .more-btn { display: none; }
+
+  /* ── CARD BODY ── */
+  .card-body { overflow: hidden; max-height: 0; transition: max-height .35s cubic-bezier(.4,0,.2,1); }
+  .session-card.open .card-body { max-height: 1000px; }
+  .card-body-inner { padding: 14px 15px 18px; border-top: 1px solid rgba(255,255,255,.05); }
+
+  .session-desc { font-size: 12.5px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+
+  /* ── SPEAKER GRID ── */
+  .speaker-section-label {
+    font-size: 7.5px; font-weight: 800; letter-spacing: .28em; text-transform: uppercase;
+    color: rgba(220,0,0,.7); margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .speaker-section-label::before { content: ''; display: inline-block; width: 12px; height: 1px; background: rgba(220,0,0,.5); flex-shrink: 0; }
+
+  .speaker-grid { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 14px; }
+
+  .speaker-chip { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 68px; }
+  .speaker-logo-box { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+  .speaker-logo-box img { width: 64px; height: 64px; object-fit: contain; filter: brightness(0) invert(1); opacity: .75; }
+  .speaker-logo-box .logo-initials { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: .06em; color: rgba(255,255,255,.38); }
+  .speaker-chip-name { font-size: 9.5px; font-weight: 700; color: rgba(255,255,255,.68); text-align: center; line-height: 1.2; }
+  .speaker-chip-role { display: none; }
+  .speaker-chip-proposed { display: none; }
+
+  .moderator-divider { font-size: 7.5px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); margin: 14px 0 10px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.05); }
+
+  .serves { display: none; }
+
+  /* Lounge pills */
+  .lounges { display: flex; gap: 6px; flex-wrap: wrap; padding: 0 15px 12px; }
+  .lounge-pill { font-size: 7.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; border-radius: 2px; padding: 3px 9px; border: 1px solid; }
+  .lounge-pill--recovery { color: var(--blue);  border-color: rgba(106,173,255,.2); background: rgba(106,173,255,.05); }
+  .lounge-pill--longevity { color: var(--gold); border-color: rgba(232,201,107,.2); background: var(--gold-dim); }
+  .lounge-pill--tech      { color: #b07aff;     border-color: rgba(176,122,255,.2); background: rgba(176,122,255,.05); }
+
+  /* Star / Featured marker */
+  .star-marker {
+    font-size: 8.5px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 5px;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .star-marker::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--red); transform: rotate(45deg); }
+
+  /* Engineering notes */
+  .curation-note {
+    margin: 40px 0 0; background: rgba(220,0,0,.025);
+    border: 1px solid rgba(220,0,0,.1); border-radius: 2px; padding: 18px 18px 16px;
+    position: relative; overflow: hidden;
+  }
+  .curation-note::before {
+    content: 'ENGINEERING NOTES';
+    position: absolute; top: -1px; left: 14px;
+    background: var(--red); color: #fff;
+    font-size: 7px; font-weight: 800; letter-spacing: .2em;
+    padding: 2px 8px; border-radius: 0 0 2px 2px;
+  }
+  .curation-note-title { font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: rgba(220,0,0,.7); margin-bottom: 10px; margin-top: 8px; }
+  .curation-note ul { padding-left: 14px; }
+  .curation-note li { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 4px; }
+  .curation-note li strong { color: rgba(255,255,255,.65); }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid rgba(255,255,255,.05);
+    padding: 20px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 8.5px; color: var(--muted); letter-spacing: .15em; text-transform: uppercase;
+  }
+  .footer-id { color: rgba(220,0,0,.45); display: flex; align-items: center; gap: 8px; }
+  .footer-id::before { content: ''; display: inline-block; width: 14px; height: 2px; background: var(--red); opacity: .5; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 44px 20px 40px; }
+    .telem-bar { padding: 0 20px; }
+    .schedule { padding: 32px 20px 60px; }
+    .session { grid-template-columns: 60px 1fr; gap: 0 14px; }
+    .hero-stamp { display: none; }
+    .telem-val { font-size: 20px; }
+    .footer { flex-direction: column; gap: 8px; padding: 18px 20px; text-align: center; }
+    .telem-inner { overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+
+  <!-- Austin circuit trace SVG -->
+  <div class="hero-circuit">
+    <svg viewBox="0 0 700 380" width="680" fill="none" xmlns="http://www.w3.org/2000/svg"
+         stroke="#cc0000" stroke-linecap="round" stroke-linejoin="round">
+      <!-- COTA-inspired circuit silhouette -->
+      <path d="M 80 320 L 80 80 Q 80 50 110 50 L 240 50 Q 270 50 270 80 L 270 110 Q 270 130 290 130 L 400 130 Q 420 130 430 150 L 450 200 Q 460 220 480 220 L 580 220 Q 600 220 610 200 L 620 170 Q 630 150 620 130 L 600 100 Q 590 85 570 85 L 520 85 Q 500 85 490 100 L 475 120 Q 465 130 450 125 L 430 115 Q 415 108 405 95 L 390 75 Q 378 60 360 60 L 310 60" stroke-width="3" stroke-opacity=".7"/>
+      <!-- Pit lane -->
+      <path d="M 80 340 L 600 340" stroke-width="1" stroke-opacity=".25" stroke-dasharray="6,8"/>
+      <!-- Start/Finish line -->
+      <line x1="80" y1="290" x2="80" y2="340" stroke-width="4" stroke-opacity=".9"/>
+      <!-- Sector markers -->
+      <circle cx="270" cy="80" r="5" stroke-width="2" stroke-opacity=".8"/>
+      <circle cx="480" cy="220" r="5" stroke-width="2" stroke-opacity=".8"/>
+      <!-- DRS zone indicators -->
+      <line x1="85" y1="300" x2="120" y2="300" stroke-width="1.5" stroke-opacity=".5" stroke-dasharray="3,3"/>
+      <line x1="560" y1="224" x2="595" y2="224" stroke-width="1.5" stroke-opacity=".5" stroke-dasharray="3,3"/>
+      <!-- Turn numbers -->
+      <text x="90" y="70" fill="#cc0000" font-size="9" font-family="monospace" opacity=".6">T1</text>
+      <text x="274" y="125" fill="#cc0000" font-size="9" font-family="monospace" opacity=".6">T11</text>
+      <text x="485" y="215" fill="#cc0000" font-size="9" font-family="monospace" opacity=".6">T18</text>
+    </svg>
+  </div>
+
+  <!-- Confidential document stamp -->
+  <div class="hero-stamp">
+    <span class="hero-stamp-line">Document</span>
+    <span class="hero-stamp-line">WP-SUMMIT-001</span>
+    <span class="hero-stamp-line">Rev 01 · 2026</span>
+    <span class="hero-stamp-line conf">Confidential</span>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow">World of Sports &amp; Human Performance Summit</div>
+    <h1 class="hero-title">Event<br><span class="dim">Flow</span></h1>
+    <div class="hero-subtitle">Weekend Operations Brief</div>
+
+    <div class="hero-meta">
+      <div class="hm-item">
+        <span class="hm-label">Date</span>
+        <span class="hm-val">Thu · Oct 22, 2026</span>
+      </div>
+      <div class="hm-item">
+        <span class="hm-label">Venue</span>
+        <span class="hm-val">Padel 39 · Austin, TX</span>
+      </div>
+      <div class="hm-item">
+        <span class="hm-label">Session</span>
+        <span class="hm-val">FP1 → Race Day</span>
+      </div>
+      <div class="hm-item">
+        <span class="hm-label">Status</span>
+        <span class="hm-val" style="color:var(--green)">Green Flag</span>
+      </div>
+    </div>
+
+    <div class="hero-featured">Tom Brady × Aescape · Live Launch · 13:45</div>
+  </div>
+</section>
+
+<!-- TELEMETRY BAR -->
+<div class="telem-bar">
+  <div class="telem-inner">
+    <div class="telem-item t-status">
+      <div class="telem-label">Track Status</div>
+      <div class="telem-val">● Green Flag</div>
+    </div>
+    <div class="telem-item">
+      <div class="telem-label">Panels</div>
+      <div class="telem-val">6</div>
+    </div>
+    <div class="telem-item">
+      <div class="telem-label">Featured</div>
+      <div class="telem-val">1</div>
+    </div>
+    <div class="telem-item">
+      <div class="telem-label">Attendees</div>
+      <div class="telem-val">200+</div>
+    </div>
+    <div class="telem-item">
+      <div class="telem-label">VVIP Dinner</div>
+      <div class="telem-val">40</div>
+    </div>
+    <div class="telem-item">
+      <div class="telem-label">Track</div>
+      <div class="telem-val" style="font-size:16px;line-height:1.4">Austin, TX</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCHEDULE -->
+<div class="schedule">
+
+  <!-- SECTOR 01 — FORMATION GRID -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 01 — Formation Grid</div>
+    <div class="sector-div-line"></div>
+  </div>
+
+  <!-- 8:30 Arrivals -->
+  <div class="session">
+    <div class="session-time">8:30 AM</div>
+    <div class="session-card session-card--break">
+      <div class="card-header" style="cursor:default;">
+        <div class="card-header-left">
+          <span class="session-badge badge-break">Arrivals</span>
+          <span class="session-title">Breakfast &amp; Lounge Activations</span>
+        </div>
+      </div>
+      <div class="lounges">
+        <span class="lounge-pill lounge-pill--longevity">Longevity Lounge</span>
+        <span class="lounge-pill lounge-pill--recovery">Recovery Lounge</span>
+        <span class="lounge-pill lounge-pill--tech">Tech Lounge</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9:15 Welcome -->
+  <div class="session">
+    <div class="session-time">9:15 AM</div>
+    <div class="session-card session-card--break">
+      <div class="card-header" style="cursor:default;">
+        <div class="card-header-left">
+          <span class="session-badge badge-welcome">Welcome</span>
+          <span class="session-title">Opening Remarks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTOR 02 — PANEL SESSIONS -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 02 — Panel Sessions</div>
+    <div class="sector-div-line"></div>
+  </div>
+
+  <!-- 9:30 Panel 1 -->
+  <div class="session">
+    <div class="session-time">9:30 AM<span class="end">10:15</span></div>
+    <div class="session-card" data-expandable>
+      <div class="card-header">
+        <div class="card-header-left">
+          <span class="session-badge badge-panel">Panel 1</span>
+          <span class="session-title">The F1 Playbook: How Brands Win in Formula 1</span>
+        </div>
+        <button class="more-btn" aria-expanded="false">
+          Debrief
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="session-desc">The real mechanics of partnering with an F1 team — the deal, the activation, the ROI — from the team, a current partner, and a brand weighing the leap.</p>
+          <div class="speaker-section-label">Speakers</div>
+          <div class="speaker-grid">
+            <div class="speaker-chip">
+              <div class="speaker-logo-box speaker-headshot"><img src="https://d3w5afnqqrsdxl.cloudfront.net/api-possible.expoplatform.co.uk/image/160x160/MTc3NjgwODA4MDY5ZTdmMDkwMTM5Njg=.jpeg" alt="Ahmed Iqbal" style="width:64px;height:64px;object-fit:cover;border-radius:50%;opacity:.9;"></div>
+              <div class="speaker-chip-name">Ahmed Iqbal</div>
+              <div class="speaker-chip-role">CMO, Cadillac F1</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box speaker-headshot"><img src="https://static-www.adweek.com/wp-content/uploads/2025/08/brave-commerce-suntory-John-Alvarado.jpg?w=400" alt="John Alvarado" style="width:64px;height:64px;object-fit:cover;object-position:top;border-radius:50%;opacity:.9;"></div>
+              <div class="speaker-chip-name">John Alvarado</div>
+              <div class="speaker-chip-role">Chief Brands Officer, Jim Beam</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box speaker-headshot"><img src="https://brand-innovators.com/wp-content/uploads/2024/01/Frias-Alex.jpeg" alt="Alex Frias" style="width:64px;height:64px;object-fit:cover;object-position:top;border-radius:50%;opacity:.9;"></div>
+              <div class="speaker-chip-name">Alex Frias</div>
+              <div class="speaker-chip-role">CMO, Steve Madden</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+          </div>
+          <div class="moderator-divider">Moderator</div>
+          <div class="speaker-grid">
+            <div class="speaker-chip">
+              <div class="speaker-logo-box" data-domain="excelsports.com"><span class="logo-initials">ES</span></div>
+              <div class="speaker-chip-name">Excel Sports or Paul Street</div>
+              <div class="speaker-chip-role">Moderator</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10:15 Break -->
+  <div class="session">
+    <div class="session-time">10:15 AM</div>
+    <div class="session-card session-card--break">
+      <div class="card-header" style="cursor:default;">
+        <div class="card-header-left">
+          <span class="session-badge badge-break">Safety Car</span>
+          <span class="session-title">Padel Courts Open · Activations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10:45 Panel 4 -->
+  <div class="session">
+    <div class="session-time">10:45 AM<span class="end">11:30</span></div>
+    <div class="session-card" data-expandable>
+      <div class="card-header">
+        <div class="card-header-left">
+          <span class="session-badge badge-panel">Panel 4</span>
+          <span class="session-title">Owning the Customer: Retention, Community &amp; the Post-Acquisition Playbook</span>
+        </div>
+        <button class="more-btn" aria-expanded="false">
+          Debrief
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="session-desc">As paid acquisition gets brutal, the winners own the customer — retention, loyalty, community, owned channels.</p>
+          <div class="speaker-section-label">Speakers</div>
+          <div class="speaker-grid">
+            <div class="speaker-chip">
+              <div class="speaker-logo-box" data-brand="poppi"><span class="logo-initials">PO</span></div>
+              <div class="speaker-chip-name">Community DTC CMO</div>
+              <div class="speaker-chip-role">Poppi / OLIPOP / Liquid Death type</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box" data-brand="klaviyo"><span class="logo-initials">KL</span></div>
+              <div class="speaker-chip-name">Speaker, Klaviyo</div>
+              <div class="speaker-chip-role">Email &amp; SMS</div>
+              <div class="speaker-chip-proposed">Sponsor Seat</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box" data-brand="okendo" data-domain="okendo.io"><span class="logo-initials">OK</span></div>
+              <div class="speaker-chip-name">Speaker, Okendo</div>
+              <div class="speaker-chip-role">Reviews &amp; Loyalty</div>
+              <div class="speaker-chip-proposed">Sponsor Seat</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11:30 Panel 3 -->
+  <div class="session">
+    <div class="session-time">11:30 AM<span class="end">12:15</span></div>
+    <div class="session-card" data-expandable>
+      <div class="card-header">
+        <div class="card-header-left">
+          <span class="session-badge badge-panel">Panel 3</span>
+          <span class="session-title">Punching Above Your Budget: Into F1 Without a $10M Check</span>
+        </div>
+        <button class="more-btn" aria-expanded="false">
+          Debrief
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="session-desc">Creative, cheap ways into motorsport — anchored by the NeuroGum × Yuki Tsunoda helmet story, plus other scrappy activations that bought outsized attention.</p>
+          <div class="speaker-section-label">Speakers</div>
+          <div class="speaker-grid">
+            <div class="speaker-chip">
+              <div class="speaker-logo-box" data-domain="neurogum.com"><span class="logo-initials">NG</span></div>
+              <div class="speaker-chip-name">Founder, NeuroGum</div>
+              <div class="speaker-chip-role">NeuroGum × Yuki Tsunoda</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box"><span class="logo-initials">PS</span></div>
+              <div class="speaker-chip-name">Paul Street</div>
+              <div class="speaker-chip-role">Driver-Side Rep</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box"><span class="logo-initials">+1</span></div>
+              <div class="speaker-chip-name">Brand TBD</div>
+              <div class="speaker-chip-role">Low-Cost Activation</div>
+              <div class="speaker-chip-proposed">TBD</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTOR 03 — MIDFIELD -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 03 — Midfield</div>
+    <div class="sector-div-line"></div>
+  </div>
+
+  <!-- 12:15 Lunch -->
+  <div class="session">
+    <div class="session-time">12:15 PM<span class="end">1:45</span></div>
+    <div class="session-card session-card--break">
+      <div class="card-header" style="cursor:default;">
+        <div class="card-header-left">
+          <span class="session-badge badge-break">Pit Stop</span>
+          <span class="session-title">Lunch + Padel with the Pros</span>
+        </div>
+      </div>
+      <div class="lounges">
+        <span class="lounge-pill lounge-pill--recovery">Sweetgreen Catering</span>
+        <span class="lounge-pill lounge-pill--tech">Courts Open</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTOR 04 — COMMAND STAGE -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 04 — Command Stage</div>
+    <div class="sector-div-line"></div>
+  </div>
+
+  <!-- 1:45 Brady × Aescape FEATURED -->
+  <div class="session">
+    <div class="session-time">1:45 PM<span class="end">2:45</span></div>
+    <div class="session-card session-card--featured" data-expandable>
+      <div class="card-header">
+        <div class="card-header-left" style="flex-direction:column; align-items:flex-start; gap:5px;">
+          <div class="star-marker">Live Launch · Headline Moment</div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span class="session-badge badge-keynote">Keynote Fireside</span>
+            <span class="session-title">Tom Brady × Aescape — Brady Protocol Launch</span>
+          </div>
+        </div>
+        <button class="more-btn" aria-expanded="false">
+          Debrief
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="session-desc">A fireside on longevity as the next brand frontier — and the live reveal of the Brady Protocol. The day's headline moment and the pivot point of the afternoon.</p>
+          <div class="speaker-section-label">Speakers</div>
+          <div class="speaker-grid">
+            <div class="speaker-chip">
+              <div class="speaker-logo-box" data-domain="tb12sports.com"><span class="logo-initials">TB</span></div>
+              <div class="speaker-chip-name">Tom Brady</div>
+              <div class="speaker-chip-role">7× Super Bowl Champion</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box" data-brand="aescape"><span class="logo-initials">AE</span></div>
+              <div class="speaker-chip-name">Founder / CEO, Aescape</div>
+              <div class="speaker-chip-role">Brady Protocol Launch</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box"><span class="logo-initials">+</span></div>
+              <div class="speaker-chip-name">Optional Athlete</div>
+              <div class="speaker-chip-role">Longevity / Performance Voice</div>
+              <div class="speaker-chip-proposed">Optional</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTOR 05 — FINAL LAPS -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 05 — Final Laps</div>
+    <div class="sector-div-line"></div>
+  </div>
+
+  <!-- 2:45 Panel 5 -->
+  <div class="session">
+    <div class="session-time">2:45 PM<span class="end">3:30</span></div>
+    <div class="session-card" data-expandable>
+      <div class="card-header">
+        <div class="card-header-left">
+          <span class="session-badge badge-panel">Panel 5</span>
+          <span class="session-title">From Viral to Reliable: Demand Forecasting &amp; Scaling Without Breaking</span>
+        </div>
+        <button class="more-btn" aria-expanded="false">
+          Debrief
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="session-desc">The operational reality behind the hype — forecasting demand, inventory, supply chain, post-purchase — the unglamorous stuff that makes or breaks a scaling brand.</p>
+          <div class="speaker-section-label">Speakers</div>
+          <div class="speaker-grid">
+            <div class="speaker-chip">
+              <div class="speaker-logo-box"><span class="logo-initials">OPS</span></div>
+              <div class="speaker-chip-name">Ops / Supply Chain Leader</div>
+              <div class="speaker-chip-role">Scaled Brand TBD</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box" data-brand="shopify"><span class="logo-initials">SH</span></div>
+              <div class="speaker-chip-name">Speaker, Shopify</div>
+              <div class="speaker-chip-role">Commerce Infrastructure</div>
+              <div class="speaker-chip-proposed">Sponsor Seat</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box" data-brand="route"><span class="logo-initials">RT</span></div>
+              <div class="speaker-chip-name">Speaker, Route</div>
+              <div class="speaker-chip-role">Post-Purchase</div>
+              <div class="speaker-chip-proposed">Sponsor Seat</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box"><span class="logo-initials">F</span></div>
+              <div class="speaker-chip-name">Founder TBD</div>
+              <div class="speaker-chip-role">Survived a Viral Spike</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3:30 Panel 6 -->
+  <div class="session">
+    <div class="session-time">3:30 PM<span class="end">4:15</span></div>
+    <div class="session-card" data-expandable>
+      <div class="card-header">
+        <div class="card-header-left">
+          <span class="session-badge badge-panel">Panel 6</span>
+          <span class="session-title">Brand Is the Moat: Marketing That Outlasts the Algorithm</span>
+        </div>
+        <button class="more-btn" aria-expanded="false">
+          Debrief
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="session-desc">Building durable brand equity and cultural relevance beyond performance marketing — the throughline that ties sports, wellness, and commerce together.</p>
+          <div class="speaker-section-label">Speakers</div>
+          <div class="speaker-grid">
+            <div class="speaker-chip">
+              <div class="speaker-logo-box" data-brand="yeti"><span class="logo-initials">YT</span></div>
+              <div class="speaker-chip-name">Iconic Brand CMO</div>
+              <div class="speaker-chip-role">Yeti / Liquid Death / Poppi type</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box"><span class="logo-initials">SB</span></div>
+              <div class="speaker-chip-name">Sports Culture Brand</div>
+              <div class="speaker-chip-role">TBD</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+            <div class="speaker-chip">
+              <div class="speaker-logo-box"><span class="logo-initials">CA</span></div>
+              <div class="speaker-chip-name">Creative Agency Voice</div>
+              <div class="speaker-chip-role">TBD</div>
+              <div class="speaker-chip-proposed">Proposed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTOR 06 — COOL DOWN LAP -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 06 — Cool Down Lap</div>
+    <div class="sector-div-line"></div>
+  </div>
+
+  <!-- 4:15 Closing -->
+  <div class="session">
+    <div class="session-time">4:15 PM</div>
+    <div class="session-card session-card--break">
+      <div class="card-header" style="cursor:default;">
+        <div class="card-header-left">
+          <span class="session-badge badge-welcome">Closing</span>
+          <span class="session-title">Closing Remarks → Reception</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4:30 Reception -->
+  <div class="session">
+    <div class="session-time">4:30 PM<span class="end">7:00</span></div>
+    <div class="session-card session-card--break">
+      <div class="card-header" style="cursor:default;">
+        <div class="card-header-left">
+          <span class="session-badge badge-reception">Podium</span>
+          <span class="session-title">Padel &amp; Chill · Open Reception</span>
+        </div>
+      </div>
+      <div class="lounges">
+        <span class="lounge-pill lounge-pill--recovery">Courts Open</span>
+        <span class="lounge-pill lounge-pill--tech">Open Bar</span>
+        <span class="lounge-pill lounge-pill--longevity">All 200 Attendees</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTOR 07 — DRIVER DEBRIEF -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 07 — Driver Debrief</div>
+    <div class="sector-div-line"></div>
+  </div>
+
+  <!-- 7:00 VVIP Dinner -->
+  <div class="session">
+    <div class="session-time">7:00 PM</div>
+    <div class="session-card session-card--featured" data-expandable>
+      <div class="card-header">
+        <div class="card-header-left" style="flex-direction:column; align-items:flex-start; gap:5px;">
+          <div class="star-marker">Invite Only · ~40 Guests</div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span class="session-badge badge-dinner">VVIP Dinner</span>
+            <span class="session-title">Sweetgreen × Michelin Chef Dinner</span>
+          </div>
+        </div>
+        <button class="more-btn" aria-expanded="false">
+          Debrief
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="session-desc">Thursday-night capstone for top ~40 attendees. Curated seating, no panels, no pitches — just the right people around the right table. Sweetgreen × Michelin chef collaboration.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Engineering Notes -->
+  <div class="curation-note">
+    <div class="curation-note-title">Programming Notes</div>
+    <ul>
+      <li><strong>Alternate draw / substance — open with F1.</strong> Leading on Cadillac sets the "this is different" tone. Commerce panels between marquee sessions keeps energy up and gives sponsors a full room.</li>
+      <li><strong>Every commerce panel needs one real operator, not two vendors.</strong> One sponsor + one respected brand CMO per panel — two sponsors reads as an ad.</li>
+      <li><strong>Spelling confirms:</strong> Yuki Tsunoda · Ammortal · Jim Beam. Speaker names are the vision — keep labeled "Proposed" until confirmed.</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="footer-id">WP-SUMMIT-001 · Rev 01 · Confidential</div>
+  <div>Willpower · World of Sports &amp; Human Performance · Austin, TX · Oct 22, 2026</div>
+</div>
+
+<script>
+  const WP_LOGOS = {
+    'cadillac-f1':  { url: 'https://www.cadillacf1team.com/assets/cadillac.webp', invert: true },
+    'stevemadden':  { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124422/willpower/logos/brand-stevemadden-logo.png', invert: true },
+    'poppi':        { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124342/willpower/logos/brand-poppi-logo.png', invert: true },
+    'klaviyo':      { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124615/willpower/logos/sponsor-klaviyo-logo.png', invert: true },
+    'shopify':      { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124382/willpower/logos/brand-shopify-hq.png', invert: true },
+    'route':        { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124690/willpower/logos/sponsor-route-logo.svg', invert: true },
+    'yeti':         { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124778/willpower/logos/sponsor-yeti-logo.png', invert: true },
+    'aescape':      { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783123942/willpower/logos/brand-aescape-wordmark-white.svg', invert: false },
+    'jimbeam.com':  { url: 'https://www.cadillacf1team.com/ctfassets/images/123jt18lixwc/7AzvGgZtFopFVGhgLwl8Nm/5075d6ec15f395259b937bd358bc04ce/Partner-Jim_Beam.svg', invert: false },
+    'excelsports.com': { url: 'https://excelsm.com/wp-content/uploads/2023/10/excel-logo-primary-wht.png', invert: false },
+    'okendo':       { url: 'https://okendo.io/wp-content/uploads/2023/07/okendo-logo.png', invert: true },
+    'okendo.io':    { url: 'https://okendo.io/wp-content/uploads/2023/07/okendo-logo.png', invert: true },
+    'neurogum.com': { url: 'https://neurogum.com/cdn/shop/files/Social_Profile_Navy_Alone.png?v=1770051993', invert: true },
+  };
+  function setLogo(box, src, invert) {
+    const img = document.createElement('img');
+    img.alt = box.dataset.brand || box.dataset.domain || '';
+    img.style.cssText = 'width:64px;height:64px;object-fit:contain;' + (invert ? 'filter:brightness(0) invert(1);opacity:.75;' : 'opacity:.85;');
+    img.onerror = function() {};
+    img.src = src;
+    box.innerHTML = '';
+    box.appendChild(img);
+  }
+  document.querySelectorAll('[data-brand],[data-domain]').forEach(box => {
+    const entry = WP_LOGOS[box.dataset.brand] || WP_LOGOS[box.dataset.domain];
+    if (entry) setLogo(box, entry.url, entry.invert);
+  });
+</script>
+
+<script>
+  document.querySelectorAll('[data-expandable]').forEach(card => {
+    const btn = card.querySelector('.more-btn');
+    const header = card.querySelector('.card-header');
+    if (!btn) return;
+    function toggle() {
+      const isOpen = card.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.childNodes[0].textContent = isOpen ? 'Close ' : 'Debrief ';
+    }
+    header.addEventListener('click', toggle);
+  });
+</script>
+</body>
+</html>
