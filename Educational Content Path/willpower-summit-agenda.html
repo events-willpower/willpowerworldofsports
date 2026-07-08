@@ -335,7 +335,7 @@
               <div class="speaker-chip-proposed">Proposed</div>
             </div>
             <div class="speaker-chip">
-              <div class="speaker-logo-box"><span class="logo-initials">JB</span></div>
+              <div class="speaker-logo-box" data-domain="jimbeam.com"><span class="logo-initials">JB</span></div>
               <div class="speaker-chip-name">CMO, Jim Beam</div>
               <div class="speaker-chip-role">Current Partner</div>
               <div class="speaker-chip-proposed">Proposed</div>
@@ -350,7 +350,7 @@
           <div class="moderator-divider">Moderator</div>
           <div class="speaker-grid">
             <div class="speaker-chip">
-              <div class="speaker-logo-box"><span class="logo-initials">ES</span></div>
+              <div class="speaker-logo-box" data-domain="excelsports.com"><span class="logo-initials">ES</span></div>
               <div class="speaker-chip-name">Excel Sports or Paul Street</div>
               <div class="speaker-chip-role">Moderator</div>
               <div class="speaker-chip-proposed">Proposed</div>
@@ -412,7 +412,7 @@
               <div class="speaker-chip-proposed">Sponsor Seat</div>
             </div>
             <div class="speaker-chip">
-              <div class="speaker-logo-box" data-brand="okendo"><span class="logo-initials">OK</span></div>
+              <div class="speaker-logo-box" data-brand="okendo" data-domain="okendo.io"><span class="logo-initials">OK</span></div>
               <div class="speaker-chip-name">Speaker, Okendo</div>
               <div class="speaker-chip-role">Reviews &amp; Loyalty</div>
               <div class="speaker-chip-proposed">Sponsor Seat</div>
@@ -450,7 +450,7 @@
           <div class="speaker-section-label">Speakers</div>
           <div class="speaker-grid">
             <div class="speaker-chip">
-              <div class="speaker-logo-box"><span class="logo-initials">NG</span></div>
+              <div class="speaker-logo-box" data-domain="neurogum.com"><span class="logo-initials">NG</span></div>
               <div class="speaker-chip-name">Founder, NeuroGum</div>
               <div class="speaker-chip-role">NeuroGum × Yuki Tsunoda</div>
               <div class="speaker-chip-proposed">Proposed</div>
@@ -519,7 +519,7 @@
           <div class="speaker-section-label">Speakers</div>
           <div class="speaker-grid">
             <div class="speaker-chip">
-              <div class="speaker-logo-box"><span class="logo-initials">TB</span></div>
+              <div class="speaker-logo-box" data-domain="tb12sports.com"><span class="logo-initials">TB</span></div>
               <div class="speaker-chip-name">Tom Brady</div>
               <div class="speaker-chip-role">7× Super Bowl Champion</div>
               <div class="speaker-chip-proposed">Proposed</div>
@@ -731,7 +731,7 @@
 <script>
   // Logo map from willpowerhq.com/data/logos.json
   const WP_LOGOS = {
-    'cadillac-f1':  { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124022/willpower/logos/brand-cadillac-f1-logo.png',   invert: true },
+    'cadillac-f1':  { url: 'https://www.cadillacf1team.com/assets/cadillac.webp', invert: true },
     'stevemadden':  { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124422/willpower/logos/brand-stevemadden-logo.png',   invert: true },
     'poppi':        { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124342/willpower/logos/brand-poppi-logo.png',          invert: true },
     'klaviyo':      { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124615/willpower/logos/sponsor-klaviyo-logo.png',      invert: true },
@@ -739,16 +739,25 @@
     'route':        { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124690/willpower/logos/sponsor-route-logo.svg',        invert: true },
     'yeti':         { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124778/willpower/logos/sponsor-yeti-logo.png',         invert: true },
     'aescape':      { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783123942/willpower/logos/brand-aescape-wordmark-white.svg', invert: false },
+    // Clearbit deprecated — direct logo URLs
+    'jimbeam.com':      { url: 'https://www.cadillacf1team.com/ctfassets/images/123jt18lixwc/7AzvGgZtFopFVGhgLwl8Nm/5075d6ec15f395259b937bd358bc04ce/Partner-Jim_Beam.svg', invert: false },
+    'excelsports.com':  { url: 'https://excelsm.com/wp-content/uploads/2023/10/excel-logo-primary-wht.png', invert: false },
+    'okendo':           { url: 'https://okendo.io/wp-content/uploads/2023/07/okendo-logo.png', invert: true },
+    'okendo.io':        { url: 'https://okendo.io/wp-content/uploads/2023/07/okendo-logo.png', invert: true },
+    'neurogum.com':     { url: 'https://neurogum.com/cdn/shop/files/Social_Profile_Navy_Alone.png?v=1770051993', invert: true },
   };
-  document.querySelectorAll('[data-brand]').forEach(box => {
-    const entry = WP_LOGOS[box.dataset.brand];
-    if (!entry) return;
+  function setLogo(box, src, invert) {
     const img = document.createElement('img');
-    img.alt = box.dataset.brand;
-    img.style.cssText = 'width:36px;height:36px;object-fit:contain;' + (entry.invert ? 'filter:brightness(0) invert(1);opacity:.85;' : 'opacity:.9;');
-    img.src = entry.url;
+    img.alt = box.dataset.brand || box.dataset.domain || '';
+    img.style.cssText = 'width:44px;height:44px;object-fit:contain;' + (invert ? 'filter:brightness(0) invert(1);opacity:.85;' : 'opacity:.9;');
+    img.onerror = function() { /* keep initials on error */ };
+    img.src = src;
     box.innerHTML = '';
     box.appendChild(img);
+  }
+  document.querySelectorAll('[data-brand], [data-domain]').forEach(box => {
+    const entry = WP_LOGOS[box.dataset.brand] || WP_LOGOS[box.dataset.domain];
+    if (entry) setLogo(box, entry.url, entry.invert);
   });
 </script>
 
