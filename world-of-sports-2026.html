@@ -346,6 +346,10 @@
     .p1__actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 
     @media (max-width: 640px) {
+      /* .p1's own overflow:hidden (below) overrides .page's overflow-y:auto,
+         which blocks real touch/wheel scrolling on mobile even though this
+         page's content is taller than one screen — restore vertical scroll. */
+      .p1 { overflow-y: auto; overflow-x: hidden; }
       .p1__body { padding: 28px 20px 150px; }
       .p1__eyebrow { flex-wrap: wrap; row-gap: 8px; margin-bottom: 18px; }
       .p1__eyebrow-dash { display: none; }
@@ -726,6 +730,21 @@
     .p5-flag--white .p5-flag__pole { background: rgba(255,255,255,.3); }
     .p5-flag--white .p5-flag__head { color: rgba(255,255,255,.6); }
 
+    @media (max-width: 640px) {
+      .p5__inner { padding: 64px 20px 150px; height: auto; min-height: 100%; }
+      .p5__head h2.p5__h2 { font-size: 26px; }
+      .p5__flags { gap: 14px; margin-top: 24px; }
+      .p5-flag { clip-path: none; flex-direction: column; border-radius: 10px; overflow: hidden; }
+      .p5-flag__pole { width: auto; height: 4px; align-self: auto; }
+      .p5-flag__body {
+        flex-direction: column; align-items: flex-start; gap: 12px;
+        padding: 18px 18px 20px;
+      }
+      .p5-flag__head { flex: none; font-size: 15px; }
+      .p5-flag__text { flex: none; font-size: 12.5px; }
+      .p5-flag__logos { flex-wrap: wrap; gap: 12px 16px; }
+    }
+
     /* ━━━━ PAGE 6: THE DAY — F1 BLUEPRINT ━━━━ */
     .p6 { background: #111; overflow: hidden; }
     .p6::before {
@@ -927,6 +946,11 @@
     .day__desc { font-size: 13px; color: var(--muted); line-height: 1.65; position: relative; z-index: 1; min-height: 86px; }
     @media (max-width: 768px) { .days { grid-template-columns: 1fr 1fr; min-height: 0; } }
     @media (max-width: 480px) { .days { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) {
+      .p7__inner { padding: 64px 20px 110px; }
+      .days { margin-top: 32px; gap: 12px; }
+      .day { min-height: 0; padding: 28px 24px 26px; }
+    }
 
     /* ━━━━ PAGE 8: SPONSORSHIP ━━━━ */
     .p8 { background: var(--deep); }
@@ -1067,6 +1091,12 @@
     .paddock-frame__label { position: absolute; bottom: 10px; left: 14px; font-family: var(--cond); font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.6); text-shadow: 0 1px 4px rgba(0,0,0,.6); }
     @media (max-width: 900px) { .sp-tiers { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 480px) { .sp-tiers { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) {
+      .p8__inner { padding: 64px 20px 100px; }
+      .sp-layout { margin-top: 32px; }
+      .sp-tiers { grid-template-columns: 1fr; gap: 14px; }
+      .sp-filmstrip-wrap { display: none; }
+    }
 
     .pkg-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 14px; }
     .pkg { border: 1px solid var(--border); border-radius: var(--r); padding: 24px; display: flex; flex-direction: column; gap: 10px; }
@@ -1134,6 +1164,27 @@
     .pit--finish .pit__num span { color: var(--yellow); font-size: 20px; }
     @media (max-width: 900px) { .pit-row { grid-template-columns: 1fr 1fr; } .circuit-car, .pit-circuit-svg { display:none; } }
     @media (max-width: 480px) { .pit-row { grid-template-columns: 1fr; } }
+    /* Mobile: the desktop circuit only shows one row of 5 cards at a time (the
+       other row's cards sit at opacity:0, dimmed by design for the track visual).
+       Stacked on mobile that hides half the events, so flatten everything to a
+       plain, fully-visible list — and un-reverse row 2 (DOM order is 10→6 for the
+       desktop track's right-to-left flow) back to chronological 6→10. */
+    @media (max-width: 640px) {
+      .pit-row { display: flex; flex-direction: column; gap: 16px; }
+      #pit-row-1 { flex-direction: column-reverse; }
+      .pit-row .pit,
+      .pit-row .pit__card,
+      .pit-row .pit__num {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+      .pit-row .pit__card { pointer-events: auto !important; padding: 16px 18px; }
+      .pit-row .pit__line { display: none; }
+      .pit-row .pit__num { cursor: default; }
+      .p9__inner { padding: 64px 20px 130px; }
+      .pit-track { gap: 32px; }
+    }
 
     .speakers { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
     .sp { font-size: 12px; color: var(--muted); padding: 5px 13px; border-radius: 100px; border: 1px solid var(--border); }
@@ -1169,6 +1220,14 @@
     }
     .p10__foot img { height: 22px; opacity: .35; }
     .p10__foot-copy { font-size: 12px; color: rgba(255,255,255,.2); }
+
+    @media (max-width: 640px) {
+      /* Same overflow:hidden-blocks-scroll issue as .p1 — restore vertical scroll. */
+      .p10 { min-height: auto; overflow-y: auto; overflow-x: hidden; }
+      .p10__body { padding: 64px 20px 40px; }
+      .p10__h { font-size: clamp(40px, 12vw, 60px); }
+      .p10__foot { padding: 24px 20px 140px; flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
   </style>
 </head>
 <body>
