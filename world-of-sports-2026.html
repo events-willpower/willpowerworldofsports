@@ -306,7 +306,7 @@
     /* ━━━━ PAGE 1: HERO ━━━━ */
     .p1 {
       min-height: 100vh; display: flex; flex-direction: column;
-      overflow: hidden;
+      overflow-y: auto; overflow-x: hidden;
       background: radial-gradient(ellipse 70% 50% at 65% 25%, rgba(123,170,212,0.08) 0%, transparent 55%), var(--ink);
     }
     .p1__body {
@@ -346,10 +346,6 @@
     .p1__actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 
     @media (max-width: 640px) {
-      /* .p1's own overflow:hidden (below) overrides .page's overflow-y:auto,
-         which blocks real touch/wheel scrolling on mobile even though this
-         page's content is taller than one screen — restore vertical scroll. */
-      .p1 { overflow-y: auto; overflow-x: hidden; }
       .p1__body { padding: 28px 20px 150px; }
       .p1__eyebrow { flex-wrap: wrap; row-gap: 8px; margin-bottom: 18px; }
       .p1__eyebrow-dash { display: none; }
@@ -536,7 +532,7 @@
 
     /* ━━━━ PAGE 3: AUDIENCE ━━━━ */
     .p3 { background: var(--ink); }
-    .p3__inner { max-width: var(--max); margin: 0 auto; padding: 52px 40px 36px; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; position: relative; z-index: 2; }
+    .p3__inner { max-width: var(--max); margin: 0 auto; padding: 52px 40px 36px; display: flex; flex-direction: column; height: auto; min-height: 100%; box-sizing: border-box; position: relative; z-index: 2; }
     .p3__head { margin-bottom: 32px; text-align: center; }
     .p3__head .label { justify-content: center; }
     .p3__groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; flex: 1; }
@@ -600,7 +596,7 @@
     .p3__f1 { font-family: var(--cond); font-weight: 900; font-size: 10px; color: var(--red); border: 1px solid rgba(201,74,58,.5); padding: 1px 5px; border-radius: 2px; letter-spacing: .04em; vertical-align: middle; }
 
     @media (max-width: 640px) {
-      .p3__inner { padding: 40px 20px 32px; height: auto; min-height: 100%; }
+      .p3__inner { padding: 40px 20px 32px; }
       .p3__head { margin-bottom: 22px; }
       .p3__groups { grid-template-columns: 1fr; gap: 18px; }
       .p3-group { gap: 2px; }
@@ -700,7 +696,7 @@
 
     /* ━━━━ PAGE 5: ACTIVATIONS ━━━━ */
     .p5 { background: #06080d; }
-    .p5__inner { max-width: var(--max); margin: 0 auto; padding: 130px 40px 40px; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; position: relative; z-index: 2; }
+    .p5__inner { max-width: var(--max); margin: 0 auto; padding: 130px 40px 40px; height: auto; min-height: 100%; box-sizing: border-box; display: flex; flex-direction: column; position: relative; z-index: 2; }
     .p5__head { text-align: center; }
     .p5__head .label { justify-content: center; }
     .p5__head h2.p5__h2 { font-size: 50px; max-width: 1080px; margin-left: auto; margin-right: auto; }
@@ -731,7 +727,7 @@
     .p5-flag--white .p5-flag__head { color: rgba(255,255,255,.6); }
 
     @media (max-width: 640px) {
-      .p5__inner { padding: 64px 20px 150px; height: auto; min-height: 100%; }
+      .p5__inner { padding: 64px 20px 150px; }
       .p5__head h2.p5__h2 { font-size: 26px; }
       .p5__flags { gap: 14px; margin-top: 24px; }
       .p5-flag { clip-path: none; flex-direction: column; border-radius: 10px; overflow: hidden; }
@@ -1202,7 +1198,7 @@
     /* ━━━━ PAGE 10: CTA ━━━━ */
     .p10 {
       min-height: 100vh; display: flex; flex-direction: column;
-      overflow: hidden;
+      overflow-y: auto; overflow-x: hidden;
       background: radial-gradient(ellipse 60% 50% at 50% 85%, rgba(123,170,212,0.06) 0%, transparent 60%), var(--ink);
     }
     .p10__checker {
@@ -1224,7 +1220,7 @@
     .p10__email { font-size: 13px; color: rgba(255,255,255,.25); margin-top: 20px; }
     .p10__email a { color: var(--blue); }
     .p10__foot {
-      padding: 32px 40px; border-top: 1px solid var(--border);
+      padding: 32px 40px 110px; border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 16px; position: relative; z-index: 2;
     }
@@ -1232,8 +1228,7 @@
     .p10__foot-copy { font-size: 12px; color: rgba(255,255,255,.2); }
 
     @media (max-width: 640px) {
-      /* Same overflow:hidden-blocks-scroll issue as .p1 — restore vertical scroll. */
-      .p10 { min-height: auto; overflow-y: auto; overflow-x: hidden; }
+      .p10 { min-height: auto; }
       .p10__body { padding: 64px 20px 40px; }
       .p10__h { font-size: clamp(40px, 12vw, 60px); }
       .p10__foot { padding: 24px 20px 140px; flex-direction: column; align-items: flex-start; gap: 10px; }
