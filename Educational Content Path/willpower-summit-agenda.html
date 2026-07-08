@@ -3,193 +3,350 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>World of Sports Summit — Full Agenda</title>
+<title>Race Command — WP Summit Operations Brief</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --ink: #05060f;
-    --ink2: #0a0c1a;
-    --blue: #6aadff;
-    --blue-dim: rgba(106,173,255,.15);
-    --gold: #e8c96b;
-    --gold-dim: rgba(232,201,107,.12);
-    --green: #4cad7a;
-    --green-dim: rgba(76,173,122,.12);
-    --border: rgba(255,255,255,.07);
-    --text: rgba(255,255,255,.88);
-    --muted: rgba(255,255,255,.38);
-    --faint: rgba(255,255,255,.1);
+    --ink:   #030408;
+    --ink2:  #06070f;
+    --red:   #dc0000;
+    --red-hi: #ff2020;
+    --gold:  #e8c96b;
+    --gold-dim: rgba(232,201,107,.1);
+    --green: #3dd68c;
+    --green-dim: rgba(61,214,140,.1);
+    --blue:  #6aadff;
+    --blue-dim: rgba(106,173,255,.1);
+    --border: rgba(255,255,255,.06);
+    --text:  rgba(255,255,255,.9);
+    --muted: rgba(255,255,255,.32);
+    --faint: rgba(255,255,255,.05);
   }
 
-  html { background: var(--ink); color: var(--text); font-family: 'Inter', sans-serif; }
+  html {
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    background-image:
+      repeating-linear-gradient(0deg,  rgba(255,255,255,.016) 0, rgba(255,255,255,.016) 1px, transparent 1px, transparent 52px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.016) 0, rgba(255,255,255,.016) 1px, transparent 1px, transparent 52px);
+  }
   body { min-height: 100vh; }
+
+  /* Red accent bar at very top */
+  body::before {
+    content: '';
+    display: block; height: 3px;
+    background: linear-gradient(90deg, var(--red) 0%, rgba(220,0,0,.5) 55%, transparent 100%);
+  }
 
   /* ── HERO ── */
   .hero {
     position: relative; overflow: hidden;
-    padding: 80px 40px 60px;
+    padding: 52px 48px 48px;
     background:
-      radial-gradient(ellipse at 15% 80%, rgba(40,60,180,.4) 0%, transparent 55%),
-      radial-gradient(ellipse at 85% 15%, rgba(130,30,50,.35) 0%, transparent 50%),
-      linear-gradient(160deg, #07091e 0%, #0d050f 60%, #04050f 100%);
-    border-bottom: 1px solid var(--border);
+      radial-gradient(ellipse at 8% 85%, rgba(120,0,20,.5) 0%, transparent 48%),
+      radial-gradient(ellipse at 88% 12%, rgba(50,8,8,.55) 0%, transparent 50%),
+      linear-gradient(150deg, #06081a 0%, #0f050a 55%, #040409 100%);
+    border-bottom: 1px solid rgba(255,255,255,.04);
   }
-  .hero-court {
-    position: absolute; inset: 0; opacity: .045; pointer-events: none;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hero-court svg { width: min(900px, 100%); }
-  .hero-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
-  .hero-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px,9vw,96px); letter-spacing: .06em; line-height: .95; color: #fff; margin-bottom: 20px; }
-  .hero-title span { color: var(--gold); }
-  .hero-meta { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .hero-meta-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--faint); }
-  .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--gold-dim); border: 1px solid rgba(232,201,107,.25); border-radius: 20px; padding: 5px 12px; color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: .1em; }
 
-  /* ── STATS ── */
-  .stats-bar { background: var(--ink2); border-bottom: 1px solid var(--border); padding: 18px 40px; }
-  .stats-inner { max-width: 900px; margin: 0 auto; display: flex; }
-  .stat { flex: 1; text-align: center; padding: 0 20px; border-right: 1px solid var(--border); }
-  .stat:last-child { border-right: none; }
-  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: .06em; color: var(--blue); line-height: 1; }
-  .stat-label { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+  /* Austin circuit trace */
+  .hero-circuit {
+    position: absolute; inset: 0; pointer-events: none;
+    display: flex; align-items: center; justify-content: flex-end;
+    opacity: .05; padding-right: 40px;
+  }
+
+  .hero-inner { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; }
+
+  /* CONFIDENTIAL stamp — top right */
+  .hero-stamp {
+    position: absolute; top: 0; right: 0; z-index: 2;
+    text-align: right;
+    border-left: 1px solid rgba(220,0,0,.2);
+    border-bottom: 1px solid rgba(220,0,0,.2);
+    padding: 10px 16px 12px;
+    background: rgba(220,0,0,.03);
+    backdrop-filter: blur(4px);
+  }
+  .hero-stamp-line {
+    display: block; font-size: 7.5px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase;
+    line-height: 2; color: rgba(220,0,0,.55);
+  }
+  .hero-stamp-line.conf {
+    color: var(--red); font-size: 8.5px; letter-spacing: .28em;
+    border-top: 1px solid rgba(220,0,0,.25); margin-top: 4px; padding-top: 5px;
+  }
+
+  .hero-eyebrow {
+    font-size: 9px; font-weight: 800; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 22px; height: 2px; background: var(--red); flex-shrink: 0; }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(68px, 11.5vw, 128px);
+    letter-spacing: .03em; line-height: .86;
+    color: #fff; margin-bottom: 0;
+  }
+  .hero-title .dim { color: rgba(255,255,255,.15); }
+
+  .hero-subtitle {
+    font-size: 10px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--muted); margin: 10px 0 28px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-subtitle::before { content: ''; display: inline-block; width: 1px; height: 14px; background: rgba(220,0,0,.6); }
+
+  /* Hero data grid */
+  .hero-meta {
+    display: flex; width: fit-content;
+    border: 1px solid rgba(255,255,255,.07); border-radius: 3px; overflow: hidden;
+    margin-bottom: 18px;
+  }
+  .hm-item {
+    padding: 8px 14px; border-right: 1px solid rgba(255,255,255,.07);
+  }
+  .hm-item:last-child { border-right: none; }
+  .hm-label { font-size: 7px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
+  .hm-val   { font-size: 11px; font-weight: 700; letter-spacing: .06em; color: rgba(255,255,255,.75); }
+
+  .hero-featured {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(220,0,0,.08); border: 1px solid rgba(220,0,0,.22);
+    border-radius: 2px; padding: 5px 11px;
+    font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--red);
+  }
+  .hero-featured::before { content: ''; display: inline-block; width: 5px; height: 5px; background: var(--red); transform: rotate(45deg); }
+
+  /* ── TELEMETRY BAR ── */
+  .telem-bar {
+    background: var(--ink2);
+    border-bottom: 1px solid rgba(255,255,255,.04);
+    padding: 0 48px;
+  }
+  .telem-inner { max-width: 960px; margin: 0 auto; display: flex; }
+  .telem-item {
+    flex: 1; padding: 11px 14px;
+    border-right: 1px solid rgba(255,255,255,.05);
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .telem-item:last-child { border-right: none; }
+  .telem-label { font-size: 7px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+  .telem-val   { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: .06em; color: #fff; line-height: 1; }
+  .telem-item.t-status .telem-val { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: .18em; color: var(--green); }
 
   /* ── SCHEDULE WRAPPER ── */
-  .schedule { max-width: 900px; margin: 0 auto; padding: 48px 40px 80px; }
-  .schedule-date { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: .3em; color: var(--muted); text-transform: uppercase; margin-bottom: 32px; display: flex; align-items: center; gap: 12px; }
-  .schedule-date::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .schedule { max-width: 960px; margin: 0 auto; padding: 48px 48px 80px; position: relative; }
+
+  /* ── SECTOR DIVIDER ── */
+  .sector-div {
+    display: flex; align-items: center; gap: 14px;
+    margin: 32px 0 18px;
+  }
+  .sector-div:first-child { margin-top: 0; }
+  .sector-div-line { flex: 1; height: 1px; background: rgba(255,255,255,.05); }
+  .sector-div-text {
+    font-size: 8px; font-weight: 800; letter-spacing: .3em; text-transform: uppercase;
+    color: rgba(220,0,0,.65); white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sector-div-text::before, .sector-div-text::after {
+    content: ''; display: inline-block;
+    width: 4px; height: 4px; background: var(--red);
+    transform: rotate(45deg); opacity: .6;
+  }
 
   /* ── SESSION ROW ── */
-  .session { display: grid; grid-template-columns: 90px 1fr; gap: 0 24px; margin-bottom: 6px; position: relative; }
-  .session:not(:last-child) .session-time::after { content: ''; position: absolute; left: 89px; top: 28px; bottom: -6px; width: 1px; background: var(--border); }
+  .session { display: grid; grid-template-columns: 78px 1fr; gap: 0 26px; margin-bottom: 4px; position: relative; }
 
-  .session-time { position: relative; padding-top: 16px; font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--muted); text-align: right; line-height: 1.3; }
-  .session-time .end { font-weight: 400; opacity: .55; display: block; margin-top: 2px; font-size: 10px; }
+  /* Red racing line */
+  .session:not(:last-child) .session-time::after {
+    content: ''; position: absolute;
+    left: 76px; top: 25px; bottom: -4px; width: 2px;
+    background: linear-gradient(to bottom, rgba(220,0,0,.55) 0%, rgba(220,0,0,.1) 100%);
+  }
+
+  .session-time {
+    position: relative; padding-top: 16px;
+    font-size: 10px; font-weight: 800; letter-spacing: .06em;
+    color: var(--muted); text-align: right; line-height: 1.3;
+    font-variant-numeric: tabular-nums;
+  }
+  .session-time .end { font-weight: 400; opacity: .45; display: block; margin-top: 2px; font-size: 9px; }
+
+  /* Timeline dot — red */
+  .session-time::before {
+    content: ''; position: absolute;
+    right: -31px; top: 19px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--red);
+    border: 2px solid var(--ink);
+    box-shadow: 0 0 0 1px rgba(220,0,0,.35), 0 0 10px rgba(220,0,0,.35);
+    z-index: 2;
+  }
+  .session:has(.session-card--break) .session-time::before {
+    background: rgba(255,255,255,.15); border-color: rgba(255,255,255,.1);
+    box-shadow: none;
+  }
+  .session:has(.session-card--featured) .session-time::before {
+    width: 10px; height: 10px; right: -32px; top: 18px;
+    box-shadow: 0 0 0 2px rgba(220,0,0,.25), 0 0 18px rgba(220,0,0,.55);
+  }
 
   /* ── SESSION CARD ── */
-  .session-card { border-radius: 12px; border: 1px solid var(--border); margin-bottom: 8px; background: rgba(10,12,26,.65); overflow: hidden; transition: border-color .2s; }
-  .session-card:hover { border-color: rgba(255,255,255,.12); }
-  .session-card--featured { background: linear-gradient(135deg, rgba(15,18,40,.95) 0%, rgba(10,8,28,.95) 100%); border-color: rgba(232,201,107,.22); box-shadow: 0 0 32px rgba(232,201,107,.05); }
-  .session-card--break { background: transparent; border-color: rgba(255,255,255,.05); }
+  .session-card {
+    border-radius: 3px; border: 1px solid var(--border);
+    margin-bottom: 6px; background: rgba(8,10,22,.72);
+    overflow: hidden; transition: border-color .18s;
+    position: relative;
+  }
+  /* Left-edge accent bar */
+  .session-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; width: 2px; height: 100%;
+    background: transparent; transition: background .2s;
+    z-index: 1;
+  }
+  .session-card:hover { border-color: rgba(255,255,255,.1); }
+  .session-card:hover::before { background: rgba(220,0,0,.35); }
 
-  /* ── CARD HEADER (always visible) ── */
-  .card-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; cursor: pointer; user-select: none; }
-  .card-header:hover .more-btn { color: rgba(255,255,255,.7); }
-  .card-header-left { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+  .session-card--featured {
+    background: rgba(14,7,14,.9);
+    border-color: rgba(220,0,0,.2);
+    box-shadow: 0 0 48px rgba(220,0,0,.07), inset 0 0 32px rgba(220,0,0,.03);
+  }
+  .session-card--featured::before { background: var(--red) !important; }
 
-  /* Badge */
-  .session-badge { display: inline-flex; align-items: center; font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; border-radius: 4px; padding: 3px 8px; white-space: nowrap; flex-shrink: 0; }
-  .badge-keynote  { background: var(--gold-dim);  color: var(--gold);  border: 1px solid rgba(232,201,107,.2); }
-  .badge-panel    { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(106,173,255,.2); }
-  .badge-break    { background: var(--green-dim); color: var(--green); border: 1px solid rgba(76,173,122,.2); }
-  .badge-reception{ background: var(--green-dim); color: var(--green); border: 1px solid rgba(76,173,122,.2); }
-  .badge-dinner   { background: rgba(160,80,200,.12); color: #c07ae8;  border: 1px solid rgba(160,80,200,.2); }
-  .badge-welcome  { background: var(--faint); color: rgba(255,255,255,.55); border: 1px solid var(--border); }
+  .session-card--break { background: transparent; border-color: rgba(255,255,255,.04); }
+  .session-card--break::before { display: none; }
 
-  .session-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: .06em; line-height: 1.1; color: #fff; }
-  .session-card--featured .session-title { font-size: 20px; }
-  .session-card--break .session-title { font-size: 16px; color: rgba(255,255,255,.6); }
+  /* ── CARD HEADER ── */
+  .card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 13px 15px; cursor: pointer; user-select: none;
+  }
+  .card-header:hover .more-btn { color: rgba(255,255,255,.55); }
+  .card-header-left { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
 
-  /* "More details" toggle — reset all button defaults */
+  /* Badges */
+  .session-badge {
+    display: inline-flex; align-items: center;
+    font-size: 7.5px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
+    border-radius: 2px; padding: 3px 7px; white-space: nowrap; flex-shrink: 0;
+  }
+  .badge-keynote  { background: rgba(220,0,0,.1);   color: #ff3333; border: 1px solid rgba(220,0,0,.25); }
+  .badge-panel    { background: rgba(255,255,255,.04); color: rgba(255,255,255,.45); border: 1px solid rgba(255,255,255,.09); }
+  .badge-break    { background: var(--green-dim);   color: var(--green); border: 1px solid rgba(61,214,140,.18); }
+  .badge-reception{ background: var(--green-dim);   color: var(--green); border: 1px solid rgba(61,214,140,.18); }
+  .badge-dinner   { background: var(--gold-dim);    color: var(--gold);  border: 1px solid rgba(232,201,107,.2); }
+  .badge-welcome  { background: var(--faint); color: var(--muted); border: 1px solid rgba(255,255,255,.06); }
+
+  .session-title { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: .06em; line-height: 1.05; color: #fff; }
+  .session-card--featured .session-title { font-size: 19px; }
+  .session-card--break .session-title { font-size: 15px; color: rgba(255,255,255,.5); }
+
   .more-btn {
     display: flex; align-items: center; gap: 5px; flex-shrink: 0;
-    font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: .04em;
-    transition: color .2s; white-space: nowrap;
+    font-size: 9px; font-weight: 800; color: var(--muted); letter-spacing: .12em; text-transform: uppercase;
+    transition: color .18s; white-space: nowrap;
     background: none; border: none; padding: 0; cursor: pointer;
     font-family: inherit; outline: none; -webkit-appearance: none;
   }
   .more-btn svg { transition: transform .25s; flex-shrink: 0; }
   .session-card.open .more-btn svg { transform: rotate(180deg); }
-  .session-card.open .more-btn { color: var(--blue); }
+  .session-card.open .more-btn { color: var(--red); }
   .session-card--break .more-btn { display: none; }
 
-  /* ── CARD BODY (collapsed by default) ── */
+  /* ── CARD BODY ── */
   .card-body { overflow: hidden; max-height: 0; transition: max-height .35s cubic-bezier(.4,0,.2,1); }
   .session-card.open .card-body { max-height: 1000px; }
-  .card-body-inner { padding: 0 18px 20px; border-top: 1px solid var(--border); padding-top: 16px; }
+  .card-body-inner { padding: 14px 15px 18px; border-top: 1px solid rgba(255,255,255,.05); }
 
-  .session-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 18px; }
+  .session-desc { font-size: 12.5px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
 
-  /* ── SPEAKER GRID — uniform logos like EEE Miami ── */
-  .speaker-section-label { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-
-  .speaker-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
-
-  .speaker-chip {
-    display: flex; flex-direction: column; align-items: center; gap: 7px;
-    width: 72px;
+  /* ── SPEAKER GRID ── */
+  .speaker-section-label {
+    font-size: 7.5px; font-weight: 800; letter-spacing: .28em; text-transform: uppercase;
+    color: rgba(220,0,0,.7); margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
   }
-  .speaker-logo-box {
-    width: 44px; height: 44px;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden; flex-shrink: 0;
-  }
-  .speaker-logo-box img {
-    width: 44px; height: 44px; object-fit: contain;
-    filter: brightness(0) invert(1); opacity: .8;
-  }
-  .speaker-logo-box .logo-initials { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: .06em; color: rgba(255,255,255,.5); }
-  .speaker-chip-name { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.75); text-align: center; line-height: 1.2; }
+  .speaker-section-label::before { content: ''; display: inline-block; width: 12px; height: 1px; background: rgba(220,0,0,.5); flex-shrink: 0; }
+
+  .speaker-grid { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 14px; }
+
+  .speaker-chip { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 68px; }
+  .speaker-logo-box { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+  .speaker-logo-box img { width: 44px; height: 44px; object-fit: contain; filter: brightness(0) invert(1); opacity: .75; }
+  .speaker-logo-box .logo-initials { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: .06em; color: rgba(255,255,255,.38); }
+  .speaker-chip-name { font-size: 9.5px; font-weight: 700; color: rgba(255,255,255,.68); text-align: center; line-height: 1.2; }
   .speaker-chip-role { display: none; }
   .speaker-chip-proposed { display: none; }
 
-  /* Moderator divider */
-  .moderator-divider { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin: 12px 0 10px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .moderator-divider { font-size: 7.5px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); margin: 14px 0 10px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.05); }
 
   .serves { display: none; }
 
-  /* Lounge pills (break cards) */
-  .lounges { display: flex; gap: 6px; flex-wrap: wrap; padding: 0 18px 14px; }
-  .lounge-pill { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; border-radius: 20px; padding: 3px 10px; border: 1px solid; }
-  .lounge-pill--recovery { color: var(--blue);  border-color: rgba(106,173,255,.25); background: rgba(106,173,255,.06); }
-  .lounge-pill--longevity{ color: var(--gold);  border-color: rgba(232,201,107,.25); background: var(--gold-dim); }
-  .lounge-pill--tech      { color: #b07aff;     border-color: rgba(176,122,255,.25); background: rgba(176,122,255,.06); }
+  /* Lounge pills */
+  .lounges { display: flex; gap: 6px; flex-wrap: wrap; padding: 0 15px 12px; }
+  .lounge-pill { font-size: 7.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; border-radius: 2px; padding: 3px 9px; border: 1px solid; }
+  .lounge-pill--recovery { color: var(--blue);  border-color: rgba(106,173,255,.2); background: rgba(106,173,255,.05); }
+  .lounge-pill--longevity { color: var(--gold); border-color: rgba(232,201,107,.2); background: var(--gold-dim); }
+  .lounge-pill--tech      { color: #b07aff;     border-color: rgba(176,122,255,.2); background: rgba(176,122,255,.05); }
 
-  /* Star marker */
-  .star-marker { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
-
-  /* Curation note */
-  .curation-note { margin: 40px 0 0; background: rgba(106,173,255,.04); border: 1px solid rgba(106,173,255,.1); border-radius: 10px; padding: 18px 20px; }
-  .curation-note-title { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
-  .curation-note ul { padding-left: 16px; }
-  .curation-note li { font-size: 12px; color: var(--muted); line-height: 1.65; margin-bottom: 5px; }
-  .curation-note li strong { color: rgba(255,255,255,.7); }
-
-  /* ── Padel ball timeline dot — on the line, not overlapping time text ── */
-  .session-time::before {
-    content: ''; position: absolute;
-    right: -29px; top: 17px;
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--ink2);
-    border: 1.5px solid rgba(106,173,255,.5);
-    box-shadow: 0 0 0 3px var(--ink);
-    z-index: 2;
+  /* Star / Featured marker */
+  .star-marker {
+    font-size: 8.5px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 5px;
+    display: flex; align-items: center; gap: 7px;
   }
-  .session:has(.session-card--featured) .session-time::before {
-    border-color: rgba(232,201,107,.65);
+  .star-marker::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--red); transform: rotate(45deg); }
+
+  /* Engineering notes */
+  .curation-note {
+    margin: 40px 0 0; background: rgba(220,0,0,.025);
+    border: 1px solid rgba(220,0,0,.1); border-radius: 2px; padding: 18px 18px 16px;
+    position: relative; overflow: hidden;
   }
-
-  /* ── Hero padel graphic ── */
-  .hero-racket {
-    position: absolute; right: -20px; top: 10px; opacity: .07;
-    pointer-events: none; z-index: 0;
+  .curation-note::before {
+    content: 'ENGINEERING NOTES';
+    position: absolute; top: -1px; left: 14px;
+    background: var(--red); color: #fff;
+    font-size: 7px; font-weight: 800; letter-spacing: .2em;
+    padding: 2px 8px; border-radius: 0 0 2px 2px;
   }
+  .curation-note-title { font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: rgba(220,0,0,.7); margin-bottom: 10px; margin-top: 8px; }
+  .curation-note ul { padding-left: 14px; }
+  .curation-note li { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 4px; }
+  .curation-note li strong { color: rgba(255,255,255,.65); }
 
-  .footer { border-top: 1px solid var(--border); padding: 28px 40px; text-align: center; font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid rgba(255,255,255,.05);
+    padding: 20px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 8.5px; color: var(--muted); letter-spacing: .15em; text-transform: uppercase;
+  }
+  .footer-id { color: rgba(220,0,0,.45); display: flex; align-items: center; gap: 8px; }
+  .footer-id::before { content: ''; display: inline-block; width: 14px; height: 2px; background: var(--red); opacity: .5; }
 
-  @media (max-width: 600px) {
-    .hero { padding: 48px 20px 40px; }
-    .stats-bar { padding: 14px 20px; }
+  @media (max-width: 640px) {
+    .hero { padding: 44px 20px 40px; }
+    .telem-bar { padding: 0 20px; }
     .schedule { padding: 32px 20px 60px; }
-    .session { grid-template-columns: 68px 1fr; gap: 0 12px; }
-    .stat-num { font-size: 24px; }
-    .speaker-grid { gap: 10px; }
-    .speaker-chip { width: 64px; }
-    .speaker-logo-box { width: 46px; height: 46px; }
+    .session { grid-template-columns: 60px 1fr; gap: 0 14px; }
+    .hero-stamp { display: none; }
+    .telem-val { font-size: 20px; }
+    .footer { flex-direction: column; gap: 8px; padding: 18px 20px; text-align: center; }
+    .telem-inner { overflow-x: auto; }
   }
 </style>
 </head>
@@ -197,86 +354,105 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-court">
-    <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#7ab4ff" stroke-linecap="round">
-      <rect x="8" y="8" width="884" height="384" stroke-width="3"/>
-      <rect x="8" y="8" width="884" height="384" stroke-width="10" stroke-opacity=".3"/>
-      <line x1="450" y1="8" x2="450" y2="392" stroke-width="2.5" stroke-dasharray="8,6"/>
-      <line x1="184" y1="8" x2="184" y2="392" stroke-width="1.2" stroke-opacity=".6"/>
-      <line x1="716" y1="8" x2="716" y2="392" stroke-width="1.2" stroke-opacity=".6"/>
-      <line x1="184" y1="200" x2="450" y2="200" stroke-width="1.2" stroke-opacity=".6"/>
-      <line x1="450" y1="200" x2="716" y2="200" stroke-width="1.2" stroke-opacity=".6"/>
-      <line x1="8"   y1="80"  x2="80"  y2="8"   stroke-width="1.5" stroke-opacity=".4"/>
-      <line x1="8"   y1="320" x2="80"  y2="392" stroke-width="1.5" stroke-opacity=".4"/>
-      <line x1="820" y1="8"   x2="892" y2="80"  stroke-width="1.5" stroke-opacity=".4"/>
-      <line x1="820" y1="392" x2="892" y2="320" stroke-width="1.5" stroke-opacity=".4"/>
+
+  <!-- Austin circuit trace SVG -->
+  <div class="hero-circuit">
+    <svg viewBox="0 0 700 380" width="680" fill="none" xmlns="http://www.w3.org/2000/svg"
+         stroke="#cc0000" stroke-linecap="round" stroke-linejoin="round">
+      <!-- COTA-inspired circuit silhouette -->
+      <path d="M 80 320 L 80 80 Q 80 50 110 50 L 240 50 Q 270 50 270 80 L 270 110 Q 270 130 290 130 L 400 130 Q 420 130 430 150 L 450 200 Q 460 220 480 220 L 580 220 Q 600 220 610 200 L 620 170 Q 630 150 620 130 L 600 100 Q 590 85 570 85 L 520 85 Q 500 85 490 100 L 475 120 Q 465 130 450 125 L 430 115 Q 415 108 405 95 L 390 75 Q 378 60 360 60 L 310 60" stroke-width="3" stroke-opacity=".7"/>
+      <!-- Pit lane -->
+      <path d="M 80 340 L 600 340" stroke-width="1" stroke-opacity=".25" stroke-dasharray="6,8"/>
+      <!-- Start/Finish line -->
+      <line x1="80" y1="290" x2="80" y2="340" stroke-width="4" stroke-opacity=".9"/>
+      <!-- Sector markers -->
+      <circle cx="270" cy="80" r="5" stroke-width="2" stroke-opacity=".8"/>
+      <circle cx="480" cy="220" r="5" stroke-width="2" stroke-opacity=".8"/>
+      <!-- DRS zone indicators -->
+      <line x1="85" y1="300" x2="120" y2="300" stroke-width="1.5" stroke-opacity=".5" stroke-dasharray="3,3"/>
+      <line x1="560" y1="224" x2="595" y2="224" stroke-width="1.5" stroke-opacity=".5" stroke-dasharray="3,3"/>
+      <!-- Turn numbers -->
+      <text x="90" y="70" fill="#cc0000" font-size="9" font-family="monospace" opacity=".6">T1</text>
+      <text x="274" y="125" fill="#cc0000" font-size="9" font-family="monospace" opacity=".6">T11</text>
+      <text x="485" y="215" fill="#cc0000" font-size="9" font-family="monospace" opacity=".6">T18</text>
     </svg>
   </div>
-  <!-- Padel racket hero graphic -->
-  <div class="hero-racket">
-    <svg width="320" height="480" viewBox="0 0 160 240" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
-      <!-- Racket head -->
-      <rect x="10" y="8" width="140" height="140" rx="70" stroke-width="5"/>
-      <!-- Grip/handle -->
-      <rect x="58" y="148" width="44" height="82" rx="10" stroke-width="5"/>
-      <!-- Grip tape lines -->
-      <line x1="58" y1="165" x2="102" y2="165" stroke-width="2.5" stroke-opacity=".5"/>
-      <line x1="58" y1="180" x2="102" y2="180" stroke-width="2.5" stroke-opacity=".5"/>
-      <line x1="58" y1="195" x2="102" y2="195" stroke-width="2.5" stroke-opacity=".5"/>
-      <line x1="58" y1="210" x2="102" y2="210" stroke-width="2.5" stroke-opacity=".5"/>
-      <!-- Hole grid (padel racket face) -->
-      <circle cx="40"  cy="50"  r="6" stroke-width="2.5"/>
-      <circle cx="65"  cy="50"  r="6" stroke-width="2.5"/>
-      <circle cx="90"  cy="50"  r="6" stroke-width="2.5"/>
-      <circle cx="115" cy="50"  r="6" stroke-width="2.5"/>
-      <circle cx="28"  cy="75"  r="6" stroke-width="2.5"/>
-      <circle cx="53"  cy="75"  r="6" stroke-width="2.5"/>
-      <circle cx="78"  cy="75"  r="6" stroke-width="2.5"/>
-      <circle cx="103" cy="75"  r="6" stroke-width="2.5"/>
-      <circle cx="128" cy="75"  r="6" stroke-width="2.5"/>
-      <circle cx="32"  cy="100" r="6" stroke-width="2.5"/>
-      <circle cx="57"  cy="100" r="6" stroke-width="2.5"/>
-      <circle cx="82"  cy="100" r="6" stroke-width="2.5"/>
-      <circle cx="107" cy="100" r="6" stroke-width="2.5"/>
-      <circle cx="128" cy="100" r="6" stroke-width="2.5"/>
-      <circle cx="42"  cy="125" r="6" stroke-width="2.5"/>
-      <circle cx="67"  cy="125" r="6" stroke-width="2.5"/>
-      <circle cx="92"  cy="125" r="6" stroke-width="2.5"/>
-      <circle cx="117" cy="125" r="6" stroke-width="2.5"/>
-      <!-- Ball -->
-      <circle cx="128" cy="185" r="22" stroke-width="4"/>
-      <path d="M 109 173 Q 128 162 147 173" stroke-width="2.5" fill="none"/>
-      <path d="M 109 197 Q 128 208 147 197" stroke-width="2.5" fill="none"/>
-    </svg>
+
+  <!-- Confidential document stamp -->
+  <div class="hero-stamp">
+    <span class="hero-stamp-line">Document</span>
+    <span class="hero-stamp-line">WP-SUMMIT-001</span>
+    <span class="hero-stamp-line">Rev 01 · 2026</span>
+    <span class="hero-stamp-line conf">Confidential</span>
   </div>
 
   <div class="hero-inner">
     <div class="hero-eyebrow">World of Sports &amp; Human Performance Summit</div>
-    <h1 class="hero-title">Full Day<br><span>Agenda</span></h1>
+    <h1 class="hero-title">Race<br><span class="dim">Command</span></h1>
+    <div class="hero-subtitle">Weekend Operations Brief</div>
+
     <div class="hero-meta">
-      <span>Thursday, Oct 22, 2026</span>
-      <span class="hero-meta-sep"></span>
-      <span>Padel 39 · Austin, TX</span>
-      <span class="hero-meta-sep"></span>
-      <span class="hero-tag">★ Tom Brady × Aescape</span>
+      <div class="hm-item">
+        <span class="hm-label">Date</span>
+        <span class="hm-val">Thu · Oct 22, 2026</span>
+      </div>
+      <div class="hm-item">
+        <span class="hm-label">Venue</span>
+        <span class="hm-val">Padel 39 · Austin, TX</span>
+      </div>
+      <div class="hm-item">
+        <span class="hm-label">Session</span>
+        <span class="hm-val">FP1 → Race Day</span>
+      </div>
+      <div class="hm-item">
+        <span class="hm-label">Status</span>
+        <span class="hm-val" style="color:var(--green)">Green Flag</span>
+      </div>
     </div>
+
+    <div class="hero-featured">Tom Brady × Aescape · Live Launch · 13:45</div>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Attendees</div></div>
-    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Panels</div></div>
-    <div class="stat"><div class="stat-num">1</div><div class="stat-label">Featured Launch</div></div>
-    <div class="stat"><div class="stat-num">40</div><div class="stat-label">VVIP Dinner</div></div>
-    <div class="stat"><div class="stat-num">1</div><div class="stat-label">City · Austin TX</div></div>
+<!-- TELEMETRY BAR -->
+<div class="telem-bar">
+  <div class="telem-inner">
+    <div class="telem-item t-status">
+      <div class="telem-label">Track Status</div>
+      <div class="telem-val">● Green Flag</div>
+    </div>
+    <div class="telem-item">
+      <div class="telem-label">Panels</div>
+      <div class="telem-val">6</div>
+    </div>
+    <div class="telem-item">
+      <div class="telem-label">Featured</div>
+      <div class="telem-val">1</div>
+    </div>
+    <div class="telem-item">
+      <div class="telem-label">Attendees</div>
+      <div class="telem-val">200+</div>
+    </div>
+    <div class="telem-item">
+      <div class="telem-label">VVIP Dinner</div>
+      <div class="telem-val">40</div>
+    </div>
+    <div class="telem-item">
+      <div class="telem-label">Track</div>
+      <div class="telem-val" style="font-size:16px;line-height:1.4">Austin, TX</div>
+    </div>
   </div>
 </div>
 
 <!-- SCHEDULE -->
 <div class="schedule">
-  <div class="schedule-date">Thursday · October 22, 2026</div>
+
+  <!-- SECTOR 01 — FORMATION GRID -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 01 — Formation Grid</div>
+    <div class="sector-div-line"></div>
+  </div>
 
   <!-- 8:30 Arrivals -->
   <div class="session">
@@ -309,6 +485,13 @@
     </div>
   </div>
 
+  <!-- SECTOR 02 — PANEL SESSIONS -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 02 — Panel Sessions</div>
+    <div class="sector-div-line"></div>
+  </div>
+
   <!-- 9:30 Panel 1 -->
   <div class="session">
     <div class="session-time">9:30 AM<span class="end">10:15</span></div>
@@ -319,7 +502,7 @@
           <span class="session-title">The F1 Playbook: How Brands Win in Formula 1</span>
         </div>
         <button class="more-btn" aria-expanded="false">
-          More details
+          Debrief
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
@@ -356,12 +539,6 @@
               <div class="speaker-chip-proposed">Proposed</div>
             </div>
           </div>
-          <div class="serves">
-            <span class="serves-label">Serves</span>
-            <span class="serves-chip">Cadillac F1</span>
-            <span class="serves-chip">Sports Sponsors</span>
-            <span class="serves-chip">Brand CMOs</span>
-          </div>
         </div>
       </div>
     </div>
@@ -373,7 +550,7 @@
     <div class="session-card session-card--break">
       <div class="card-header" style="cursor:default;">
         <div class="card-header-left">
-          <span class="session-badge badge-break">Break</span>
+          <span class="session-badge badge-break">Safety Car</span>
           <span class="session-title">Padel Courts Open · Activations</span>
         </div>
       </div>
@@ -390,7 +567,7 @@
           <span class="session-title">Owning the Customer: Retention, Community &amp; the Post-Acquisition Playbook</span>
         </div>
         <button class="more-btn" aria-expanded="false">
-          More details
+          Debrief
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
@@ -418,13 +595,6 @@
               <div class="speaker-chip-proposed">Sponsor Seat</div>
             </div>
           </div>
-          <div class="serves">
-            <span class="serves-label">Serves</span>
-            <span class="serves-chip">Klaviyo</span>
-            <span class="serves-chip">Okendo</span>
-            <span class="serves-chip">PostPilot</span>
-            <span class="serves-chip">DTC Marketers</span>
-          </div>
         </div>
       </div>
     </div>
@@ -440,7 +610,7 @@
           <span class="session-title">Punching Above Your Budget: Into F1 Without a $10M Check</span>
         </div>
         <button class="more-btn" aria-expanded="false">
-          More details
+          Debrief
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
@@ -468,15 +638,16 @@
               <div class="speaker-chip-proposed">TBD</div>
             </div>
           </div>
-          <div class="serves">
-            <span class="serves-label">Serves</span>
-            <span class="serves-chip">Growth-Stage Brands</span>
-            <span class="serves-chip">Founders</span>
-            <span class="serves-chip">Brand Builders</span>
-          </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- SECTOR 03 — MIDFIELD -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 03 — Midfield</div>
+    <div class="sector-div-line"></div>
   </div>
 
   <!-- 12:15 Lunch -->
@@ -485,7 +656,7 @@
     <div class="session-card session-card--break">
       <div class="card-header" style="cursor:default;">
         <div class="card-header-left">
-          <span class="session-badge badge-break">Lunch Break</span>
+          <span class="session-badge badge-break">Pit Stop</span>
           <span class="session-title">Lunch + Padel with the Pros</span>
         </div>
       </div>
@@ -496,20 +667,27 @@
     </div>
   </div>
 
+  <!-- SECTOR 04 — COMMAND STAGE -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 04 — Command Stage</div>
+    <div class="sector-div-line"></div>
+  </div>
+
   <!-- 1:45 Brady × Aescape FEATURED -->
   <div class="session">
     <div class="session-time">1:45 PM<span class="end">2:45</span></div>
     <div class="session-card session-card--featured" data-expandable>
       <div class="card-header">
-        <div class="card-header-left" style="flex-direction:column; align-items:flex-start; gap:6px;">
-          <div class="star-marker">★ Featured · Live Launch</div>
+        <div class="card-header-left" style="flex-direction:column; align-items:flex-start; gap:5px;">
+          <div class="star-marker">Live Launch · Headline Moment</div>
           <div style="display:flex; align-items:center; gap:10px;">
             <span class="session-badge badge-keynote">Keynote Fireside</span>
             <span class="session-title">Tom Brady × Aescape — Brady Protocol Launch</span>
           </div>
         </div>
         <button class="more-btn" aria-expanded="false">
-          More details
+          Debrief
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
@@ -537,16 +715,16 @@
               <div class="speaker-chip-proposed">Optional</div>
             </div>
           </div>
-          <div class="serves">
-            <span class="serves-label">Serves</span>
-            <span class="serves-chip">Aescape Launch</span>
-            <span class="serves-chip">Wellness Theme</span>
-            <span class="serves-chip">Press Headline</span>
-            <span class="serves-chip">Full Room</span>
-          </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- SECTOR 05 — FINAL LAPS -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 05 — Final Laps</div>
+    <div class="sector-div-line"></div>
   </div>
 
   <!-- 2:45 Panel 5 -->
@@ -559,7 +737,7 @@
           <span class="session-title">From Viral to Reliable: Demand Forecasting &amp; Scaling Without Breaking</span>
         </div>
         <button class="more-btn" aria-expanded="false">
-          More details
+          Debrief
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
@@ -593,13 +771,6 @@
               <div class="speaker-chip-proposed">Proposed</div>
             </div>
           </div>
-          <div class="serves">
-            <span class="serves-label">Serves</span>
-            <span class="serves-chip">Shopify</span>
-            <span class="serves-chip">Route</span>
-            <span class="serves-chip">Operators</span>
-            <span class="serves-chip">Founders</span>
-          </div>
         </div>
       </div>
     </div>
@@ -611,11 +782,11 @@
     <div class="session-card" data-expandable>
       <div class="card-header">
         <div class="card-header-left">
-          <span class="session-badge badge-panel">Panel 6 · Stretch</span>
+          <span class="session-badge badge-panel">Panel 6</span>
           <span class="session-title">Brand Is the Moat: Marketing That Outlasts the Algorithm</span>
         </div>
         <button class="more-btn" aria-expanded="false">
-          More details
+          Debrief
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
@@ -643,14 +814,16 @@
               <div class="speaker-chip-proposed">Proposed</div>
             </div>
           </div>
-          <div class="serves">
-            <span class="serves-label">Serves</span>
-            <span class="serves-chip">Every Brand Marketer</span>
-            <span class="serves-chip">Thematic Close</span>
-          </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- SECTOR 06 — COOL DOWN LAP -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 06 — Cool Down Lap</div>
+    <div class="sector-div-line"></div>
   </div>
 
   <!-- 4:15 Closing -->
@@ -672,7 +845,7 @@
     <div class="session-card session-card--break">
       <div class="card-header" style="cursor:default;">
         <div class="card-header-left">
-          <span class="session-badge badge-reception">Reception</span>
+          <span class="session-badge badge-reception">Podium</span>
           <span class="session-title">Padel &amp; Chill · Open Reception</span>
         </div>
       </div>
@@ -684,37 +857,39 @@
     </div>
   </div>
 
+  <!-- SECTOR 07 — DRIVER DEBRIEF -->
+  <div class="sector-div">
+    <div class="sector-div-line"></div>
+    <div class="sector-div-text">Sector 07 — Driver Debrief</div>
+    <div class="sector-div-line"></div>
+  </div>
+
   <!-- 7:00 VVIP Dinner -->
   <div class="session">
     <div class="session-time">7:00 PM</div>
     <div class="session-card session-card--featured" data-expandable>
       <div class="card-header">
-        <div class="card-header-left" style="flex-direction:column; align-items:flex-start; gap:6px;">
-          <div class="star-marker">★ Invite Only</div>
+        <div class="card-header-left" style="flex-direction:column; align-items:flex-start; gap:5px;">
+          <div class="star-marker">Invite Only · ~40 Guests</div>
           <div style="display:flex; align-items:center; gap:10px;">
             <span class="session-badge badge-dinner">VVIP Dinner</span>
             <span class="session-title">Sweetgreen × Michelin Chef Dinner</span>
           </div>
         </div>
         <button class="more-btn" aria-expanded="false">
-          More details
+          Debrief
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
       <div class="card-body">
         <div class="card-body-inner">
           <p class="session-desc">Thursday-night capstone for top ~40 attendees. Curated seating, no panels, no pitches — just the right people around the right table. Sweetgreen × Michelin chef collaboration.</p>
-          <div class="serves">
-            <span class="serves-label">Capacity</span>
-            <span class="serves-chip">~40 guests</span>
-            <span class="serves-chip">Invite only</span>
-          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Curation Notes -->
+  <!-- Engineering Notes -->
   <div class="curation-note">
     <div class="curation-note-title">Programming Notes</div>
     <ul>
@@ -726,36 +901,37 @@
 
 </div>
 
-<div class="footer">Willpower · World of Sports &amp; Human Performance · Austin, TX · Oct 22, 2026 · events@drinkwillpower.com</div>
+<div class="footer">
+  <div class="footer-id">WP-SUMMIT-001 · Rev 01 · Confidential</div>
+  <div>Willpower · World of Sports &amp; Human Performance · Austin, TX · Oct 22, 2026</div>
+</div>
 
 <script>
-  // Logo map from willpowerhq.com/data/logos.json
   const WP_LOGOS = {
     'cadillac-f1':  { url: 'https://www.cadillacf1team.com/assets/cadillac.webp', invert: true },
-    'stevemadden':  { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124422/willpower/logos/brand-stevemadden-logo.png',   invert: true },
-    'poppi':        { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124342/willpower/logos/brand-poppi-logo.png',          invert: true },
-    'klaviyo':      { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124615/willpower/logos/sponsor-klaviyo-logo.png',      invert: true },
-    'shopify':      { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124382/willpower/logos/brand-shopify-hq.png',          invert: true },
-    'route':        { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124690/willpower/logos/sponsor-route-logo.svg',        invert: true },
-    'yeti':         { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124778/willpower/logos/sponsor-yeti-logo.png',         invert: true },
+    'stevemadden':  { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124422/willpower/logos/brand-stevemadden-logo.png', invert: true },
+    'poppi':        { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124342/willpower/logos/brand-poppi-logo.png', invert: true },
+    'klaviyo':      { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124615/willpower/logos/sponsor-klaviyo-logo.png', invert: true },
+    'shopify':      { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124382/willpower/logos/brand-shopify-hq.png', invert: true },
+    'route':        { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124690/willpower/logos/sponsor-route-logo.svg', invert: true },
+    'yeti':         { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783124778/willpower/logos/sponsor-yeti-logo.png', invert: true },
     'aescape':      { url: 'https://res.cloudinary.com/dtweaijj1/image/upload/v1783123942/willpower/logos/brand-aescape-wordmark-white.svg', invert: false },
-    // Clearbit deprecated — direct logo URLs
-    'jimbeam.com':      { url: 'https://www.cadillacf1team.com/ctfassets/images/123jt18lixwc/7AzvGgZtFopFVGhgLwl8Nm/5075d6ec15f395259b937bd358bc04ce/Partner-Jim_Beam.svg', invert: false },
-    'excelsports.com':  { url: 'https://excelsm.com/wp-content/uploads/2023/10/excel-logo-primary-wht.png', invert: false },
-    'okendo':           { url: 'https://okendo.io/wp-content/uploads/2023/07/okendo-logo.png', invert: true },
-    'okendo.io':        { url: 'https://okendo.io/wp-content/uploads/2023/07/okendo-logo.png', invert: true },
-    'neurogum.com':     { url: 'https://neurogum.com/cdn/shop/files/Social_Profile_Navy_Alone.png?v=1770051993', invert: true },
+    'jimbeam.com':  { url: 'https://www.cadillacf1team.com/ctfassets/images/123jt18lixwc/7AzvGgZtFopFVGhgLwl8Nm/5075d6ec15f395259b937bd358bc04ce/Partner-Jim_Beam.svg', invert: false },
+    'excelsports.com': { url: 'https://excelsm.com/wp-content/uploads/2023/10/excel-logo-primary-wht.png', invert: false },
+    'okendo':       { url: 'https://okendo.io/wp-content/uploads/2023/07/okendo-logo.png', invert: true },
+    'okendo.io':    { url: 'https://okendo.io/wp-content/uploads/2023/07/okendo-logo.png', invert: true },
+    'neurogum.com': { url: 'https://neurogum.com/cdn/shop/files/Social_Profile_Navy_Alone.png?v=1770051993', invert: true },
   };
   function setLogo(box, src, invert) {
     const img = document.createElement('img');
     img.alt = box.dataset.brand || box.dataset.domain || '';
-    img.style.cssText = 'width:44px;height:44px;object-fit:contain;' + (invert ? 'filter:brightness(0) invert(1);opacity:.85;' : 'opacity:.9;');
-    img.onerror = function() { /* keep initials on error */ };
+    img.style.cssText = 'width:44px;height:44px;object-fit:contain;' + (invert ? 'filter:brightness(0) invert(1);opacity:.75;' : 'opacity:.85;');
+    img.onerror = function() {};
     img.src = src;
     box.innerHTML = '';
     box.appendChild(img);
   }
-  document.querySelectorAll('[data-brand], [data-domain]').forEach(box => {
+  document.querySelectorAll('[data-brand],[data-domain]').forEach(box => {
     const entry = WP_LOGOS[box.dataset.brand] || WP_LOGOS[box.dataset.domain];
     if (entry) setLogo(box, entry.url, entry.invert);
   });
@@ -769,7 +945,7 @@
     function toggle() {
       const isOpen = card.classList.toggle('open');
       btn.setAttribute('aria-expanded', isOpen);
-      btn.childNodes[0].textContent = isOpen ? 'Less ' : 'More details ';
+      btn.childNodes[0].textContent = isOpen ? 'Close ' : 'Debrief ';
     }
     header.addEventListener('click', toggle);
   });
