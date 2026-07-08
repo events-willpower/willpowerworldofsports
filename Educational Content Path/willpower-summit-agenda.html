@@ -123,29 +123,24 @@
     display: flex; flex-direction: column; align-items: center; gap: 7px;
     width: 72px;
   }
-  /* Uniform logo box — all same size, same treatment */
   .speaker-logo-box {
-    width: 52px; height: 52px; border-radius: 10px;
-    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+    width: 44px; height: 44px;
     display: flex; align-items: center; justify-content: center;
     overflow: hidden; flex-shrink: 0;
   }
   .speaker-logo-box img {
-    width: 36px; height: 36px; object-fit: contain;
+    width: 44px; height: 44px; object-fit: contain;
     filter: brightness(0) invert(1); opacity: .8;
   }
-  .speaker-logo-box .logo-initials { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: .06em; color: rgba(255,255,255,.6); }
+  .speaker-logo-box .logo-initials { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: .06em; color: rgba(255,255,255,.5); }
   .speaker-chip-name { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.75); text-align: center; line-height: 1.2; }
-  .speaker-chip-role { font-size: 9px; color: var(--muted); text-align: center; line-height: 1.2; }
-  .speaker-chip-proposed { font-size: 8px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: rgba(232,201,107,.6); text-align: center; }
+  .speaker-chip-role { display: none; }
+  .speaker-chip-proposed { display: none; }
 
   /* Moderator divider */
   .moderator-divider { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin: 12px 0 10px; padding-top: 12px; border-top: 1px solid var(--border); }
 
-  /* Serves chips */
-  .serves { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
-  .serves-label { font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
-  .serves-chip { font-size: 9px; font-weight: 600; background: var(--faint); border-radius: 4px; padding: 3px 8px; color: rgba(255,255,255,.5); }
+  .serves { display: none; }
 
   /* Lounge pills (break cards) */
   .lounges { display: flex; gap: 6px; flex-wrap: wrap; padding: 0 18px 14px; }
@@ -331,7 +326,7 @@
       <div class="card-body">
         <div class="card-body-inner">
           <p class="session-desc">The real mechanics of partnering with an F1 team — the deal, the activation, the ROI — from the team, a current partner, and a brand weighing the leap.</p>
-          <div class="speaker-section-label">Proposed Speakers</div>
+          <div class="speaker-section-label">Speakers</div>
           <div class="speaker-grid">
             <div class="speaker-chip">
               <div class="speaker-logo-box" data-brand="cadillac-f1"><span class="logo-initials">M</span></div>
@@ -402,7 +397,7 @@
       <div class="card-body">
         <div class="card-body-inner">
           <p class="session-desc">As paid acquisition gets brutal, the winners own the customer — retention, loyalty, community, owned channels.</p>
-          <div class="speaker-section-label">Proposed Speakers</div>
+          <div class="speaker-section-label">Speakers</div>
           <div class="speaker-grid">
             <div class="speaker-chip">
               <div class="speaker-logo-box" data-brand="poppi"><span class="logo-initials">PO</span></div>
@@ -452,7 +447,7 @@
       <div class="card-body">
         <div class="card-body-inner">
           <p class="session-desc">Creative, cheap ways into motorsport — anchored by the NeuroGum × Yuki Tsunoda helmet story, plus other scrappy activations that bought outsized attention.</p>
-          <div class="speaker-section-label">Proposed Speakers</div>
+          <div class="speaker-section-label">Speakers</div>
           <div class="speaker-grid">
             <div class="speaker-chip">
               <div class="speaker-logo-box"><span class="logo-initials">NG</span></div>
@@ -521,7 +516,7 @@
       <div class="card-body">
         <div class="card-body-inner">
           <p class="session-desc">A fireside on longevity as the next brand frontier — and the live reveal of the Brady Protocol. The day's headline moment and the pivot point of the afternoon.</p>
-          <div class="speaker-section-label">Proposed Speakers</div>
+          <div class="speaker-section-label">Speakers</div>
           <div class="speaker-grid">
             <div class="speaker-chip">
               <div class="speaker-logo-box"><span class="logo-initials">TB</span></div>
@@ -571,7 +566,7 @@
       <div class="card-body">
         <div class="card-body-inner">
           <p class="session-desc">The operational reality behind the hype — forecasting demand, inventory, supply chain, post-purchase — the unglamorous stuff that makes or breaks a scaling brand.</p>
-          <div class="speaker-section-label">Proposed Speakers</div>
+          <div class="speaker-section-label">Speakers</div>
           <div class="speaker-grid">
             <div class="speaker-chip">
               <div class="speaker-logo-box"><span class="logo-initials">OPS</span></div>
@@ -627,7 +622,7 @@
       <div class="card-body">
         <div class="card-body-inner">
           <p class="session-desc">Building durable brand equity and cultural relevance beyond performance marketing — the throughline that ties sports, wellness, and commerce together.</p>
-          <div class="speaker-section-label">Proposed Speakers</div>
+          <div class="speaker-section-label">Speakers</div>
           <div class="speaker-grid">
             <div class="speaker-chip">
               <div class="speaker-logo-box" data-brand="yeti"><span class="logo-initials">YT</span></div>
