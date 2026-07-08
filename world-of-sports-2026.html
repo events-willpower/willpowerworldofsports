@@ -640,100 +640,69 @@
     .p5-flag--white .p5-flag__pole { background: rgba(255,255,255,.3); }
     .p5-flag--white .p5-flag__head { color: rgba(255,255,255,.6); }
 
-    /* ━━━━ PAGE 6: AGENDA ━━━━ */
-    /* ━━━━ PAGE 6: THE DAY — F1 BLUEPRINT ━━━━ */
-    .p6 { background: #111; overflow: hidden; }
-    .p6::before {
-      content: ''; position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(30,100,220,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(30,100,220,.035) 1px, transparent 1px);
-      background-size: 44px 44px; pointer-events: none; z-index: 0;
-    }
-    .p6::after {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-      background: #E8002D; z-index: 3;
+    /* ━━━━ PAGE 6: THE DAY — EVENT FLOW ━━━━ */
+    .p6 { background: #05060f; overflow: hidden; }
+    .p6-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 20% 80%, rgba(40,60,140,.45) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 20%, rgba(80,20,30,.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(10,14,40,.8) 0%, transparent 80%),
+        linear-gradient(160deg, #06091e 0%, #0a040e 60%, #04050f 100%);
     }
     .p6__inner {
-      max-width: var(--max); margin: 0 auto;
-      padding: 0 44px 0 80px;
       position: relative; z-index: 2;
+      padding: 52px 14px 72px;
       height: 100%; box-sizing: border-box;
-      display: flex; flex-direction: column;
-    }
-    /* F1 car blueprint SVG */
-    .p6-car {
-      position: absolute; left: -2%; top: 50%; transform: translateY(-42%);
-      width: 104%; opacity: .065; pointer-events: none; z-index: 1;
-    }
-    /* Corner spec block */
-    .p6-corner {
-      position: absolute; top: 76px; right: 44px; z-index: 4;
-      border: 1px solid rgba(255,255,255,.1); padding: 8px 12px;
-      background: rgba(0,0,0,.6); display: flex; gap: 14px;
-    }
-    .p6-corner__row { margin-bottom: 0; }
-    .p6-corner__label { font-family: 'Courier New', monospace; font-size: 5.5px; letter-spacing: .22em; color: rgba(255,255,255,.25); text-transform: uppercase; display: block; }
-    .p6-corner__val { font-family: 'Bebas Neue', var(--cond); font-size: 11px; letter-spacing: .1em; color: rgba(255,255,255,.75); display: block; line-height: 1.1; }
-    /* Left ruler */
-    .p6-ruler {
-      position: absolute; left: 10px; top: 165px; bottom: 72px;
       display: flex; flex-direction: column; justify-content: space-between;
-      z-index: 3; pointer-events: none;
     }
-    .p6-ruler__mark {
-      font-family: 'Courier New', monospace; font-size: 6px; letter-spacing: .08em;
-      color: rgba(30,130,255,.28); display: flex; align-items: center; gap: 3px;
+    /* ── Header ── */
+    .ef-header { display: flex; align-items: baseline; gap: 8px; flex-shrink: 0; margin-bottom: 2px; }
+    .ef-header__title { font-family: 'Bebas Neue', var(--cond); font-size: 30px; letter-spacing: .12em; color: #fff; line-height: 1; }
+    .ef-header__sub { font-family: var(--cond); font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+    /* ── Anchor pill rows ── */
+    .ef-anchor {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(12,17,46,.92);
+      border: 1px solid rgba(100,130,220,.28);
+      border-radius: 44px; padding: 9px 18px 10px; flex-shrink: 0;
     }
-    .p6-ruler__mark::after { content: '─'; color: rgba(30,130,255,.2); }
-    /* Scattered tech labels */
-    .p6-tech { position: absolute; z-index: 1; pointer-events: none; }
-    .p6-tech__key { font-family: 'Courier New', monospace; font-size: 6.5px; letter-spacing: .2em; color: rgba(255,255,255,.1); text-transform: uppercase; display: block; margin-bottom: 1px; }
-    .p6-tech__val { font-family: 'Courier New', monospace; font-size: 8.5px; letter-spacing: .1em; color: rgba(30,130,255,.14); display: block; }
-    /* Doc stamp */
-    .p6-stamp { position: absolute; bottom: 22px; left: 80px; z-index: 4; pointer-events: none; display: flex; gap: 22px; }
-    .p6-stamp__label { font-family: 'Courier New', monospace; font-size: 6px; letter-spacing: .2em; color: rgba(255,255,255,.18); text-transform: uppercase; display: block; }
-    .p6-stamp__val { font-family: 'Courier New', monospace; font-size: 7.5px; letter-spacing: .12em; color: rgba(255,255,255,.32); text-transform: uppercase; }
-    /* Header */
-    .p6-header { padding-top: 70px; }
-    .p6-rule { width: 100%; height: 1px; background: rgba(255,255,255,.1); margin: 8px 0; }
-    .p6-rule--red { background: #E8002D; margin: 0; }
-    .p6-eyebrow { font-family: 'Courier New', monospace; font-size: 7.5px; letter-spacing: .16em; color: rgba(30,130,255,.55); text-transform: uppercase; margin-bottom: 4px; max-width: 60%; }
-    .p6-title { font-family: 'Bebas Neue', var(--cond); font-size: 50px; letter-spacing: .08em; line-height: 1; color: #fff; margin: 0; max-width: 60%; }
-    /* ── Flow layout ── */
-    .p6-flow { flex: 1; min-height: 0; margin-top: 8px; display: flex; flex-direction: column; gap: 5px; overflow: hidden; }
-    /* Anchor rows — highlighted events */
-    .p6-anchor {
-      display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      background: rgba(232,0,45,.07); border: 1px solid rgba(232,0,45,.22);
-      border-radius: 2px; padding: 7px 12px; flex-shrink: 0;
+    .ef-anchor__icon { font-size: 20px; flex-shrink: 0; }
+    .ef-anchor__body { flex: 1; min-width: 0; text-align: center; }
+    .ef-anchor__time { font-family: var(--cond); font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.38); display: block; }
+    .ef-anchor__name { font-family: 'Bebas Neue', var(--cond); font-size: 17px; letter-spacing: .1em; text-transform: uppercase; color: #fff; display: block; line-height: 1.1; }
+    .ef-anchor__logos { display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 5px; flex-wrap: wrap; }
+    .ef-anchor__logo { height: 16px; width: auto; max-width: 50px; object-fit: contain; filter: brightness(0) invert(1); opacity: .7; }
+    .ef-anchor__logo[src*="gstatic"] { filter: none; border-radius: 4px; opacity: .85; }
+    .ef-anchor__logo--inv { filter: invert(1) brightness(2) !important; }
+    /* ── Track sections ── */
+    .ef-section { display: flex; gap: 0; flex-shrink: 0; }
+    .ef-section__vtag {
+      writing-mode: vertical-rl; transform: rotate(180deg);
+      font-family: var(--cond); font-size: 7.5px; font-weight: 900;
+      letter-spacing: .3em; text-transform: uppercase; color: #fff;
+      padding: 6px 5px; min-width: 20px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
     }
-    .p6-anchor__left { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-    .p6-anchor__time { font-family: 'Bebas Neue', var(--cond); font-size: 22px; color: #fff; letter-spacing: .03em; line-height: 1; }
-    .p6-anchor__arrow { font-family: 'Courier New', monospace; font-size: 9px; color: rgba(232,0,45,.55); letter-spacing: -.06em; }
-    .p6-anchor__title { font-family: var(--cond); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.9); }
-    .p6-anchor__logos { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-    .p6-anchor__logo { height: 16px; width: auto; max-width: 52px; object-fit: contain; filter: brightness(0) invert(1); opacity: .65; }
-    .p6-anchor__logo[src*="gstatic"] { filter: grayscale(1) brightness(3); opacity: .5; }
-    /* Track sections — BRANDS / PERFORMANCE */
-    .p6-track { display: flex; gap: 0; flex-shrink: 0; }
-    .p6-track__label {
-      writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);
-      font-family: 'Courier New', monospace; font-size: 6px; letter-spacing: .22em; text-transform: uppercase;
-      color: rgba(255,255,255,.18); padding: 4px 5px; flex-shrink: 0; border-left: 1px solid rgba(255,255,255,.06);
-    }
-    .p6-track__panels { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; border-left: 2px solid rgba(232,0,45,.25); padding-left: 8px; }
-    /* Panel rows */
-    .p6-panel { display: flex; align-items: center; gap: 0; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,.04); }
-    .p6-panel__num { font-family: 'Courier New', monospace; font-size: 5.5px; letter-spacing: .12em; color: rgba(30,130,255,.35); text-transform: uppercase; width: 42px; flex-shrink: 0; }
-    .p6-panel__time { font-family: 'Bebas Neue', var(--cond); font-size: 24px; letter-spacing: .02em; color: rgba(255,255,255,.45); width: 58px; flex-shrink: 0; line-height: 1; }
-    .p6-panel__arrow { font-family: 'Courier New', monospace; font-size: 9px; color: rgba(232,0,45,.35); flex-shrink: 0; padding: 0 6px; letter-spacing: -.06em; }
-    .p6-panel__content { flex: 1; min-width: 0; }
-    .p6-panel__title { font-family: var(--cond); font-size: 12px; font-weight: 700; letter-spacing: .05em; color: rgba(255,255,255,.85); line-height: 1.2; }
-    .p6-panel__desc { font-family: 'Courier New', monospace; font-size: 6px; letter-spacing: .04em; color: rgba(255,255,255,.2); margin-top: 1px; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
-    .p6-panel__targets { display: flex; align-items: center; gap: 5px; flex-shrink: 0; margin-left: 6px; }
-    .p6-panel__tlogo { height: 13px; width: auto; max-width: 38px; object-fit: contain; filter: brightness(0) invert(1); opacity: .45; }
-    .p6-panel__tlogo[src*="gstatic"] { filter: grayscale(1) brightness(3); opacity: .35; }
+    .ef-section--brands .ef-section__vtag { background: #8b1a1a; border-radius: 4px 0 0 4px; }
+    .ef-section--perf .ef-section__vtag { background: #0d2f78; border-radius: 4px 0 0 4px; }
+    .ef-section__panels { flex: 1; min-width: 0; display: flex; flex-direction: column; border-left: 3px solid rgba(90,160,255,.35); }
+    /* ── Panel rows ── */
+    .ef-panel { display: flex; align-items: stretch; background: rgba(6,9,26,.85); border-bottom: 1px solid rgba(255,255,255,.05); }
+    .ef-panel__main { flex: 1; min-width: 0; padding: 7px 8px; display: flex; flex-direction: column; justify-content: center; }
+    .ef-panel__time { font-family: var(--cond); font-size: 11px; font-weight: 700; color: #6aadff; letter-spacing: .08em; line-height: 1; }
+    .ef-panel__title { font-family: var(--cond); font-size: 12px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; color: #fff; line-height: 1.2; margin-top: 1px; }
+    .ef-panel__desc { font-size: 8.5px; color: rgba(255,255,255,.4); margin-top: 2px; line-height: 1.35; }
+    .ef-panel__right { display: flex; align-items: stretch; flex-shrink: 0; border-left: 1px solid rgba(255,255,255,.07); }
+    .ef-panel__tgrid { display: grid; grid-template-columns: repeat(2, 32px); gap: 4px; padding: 5px 6px; align-content: center; justify-items: center; }
+    .ef-panel__tlogo { height: 16px; width: 28px; object-fit: contain; filter: brightness(0) invert(1); opacity: .55; }
+    .ef-panel__tlogo[src*="gstatic"] { filter: none; border-radius: 3px; opacity: .85; width: 28px; height: 16px; object-fit: cover; }
+    .ef-panel__tlogo--inv { filter: invert(1) brightness(2) !important; opacity: .7 !important; }
+    .ef-targets-vtag { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--cond); font-size: 5.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.18); padding: 4px 3px; border-left: 1px solid rgba(255,255,255,.08); align-self: stretch; display: flex; align-items: center; justify-content: center; }
+    /* ── Bottom anchor (Padel & Chill) ── */
+    .ef-anchor--chill { justify-content: space-between; padding: 10px 20px; }
+    .ef-anchor--chill .ef-anchor__body { flex: initial; }
+    .ef-chill-logo { height: 20px; width: auto; max-width: 70px; object-fit: contain; filter: brightness(0) invert(1); opacity: .8; }
+    .ef-chill-logo[src*="gstatic"] { filter: none; border-radius: 4px; opacity: .9; }
 
     /* ━━━━ PAGE 7: WEEKEND ━━━━ */
     .p7 { background: var(--ink); }
@@ -1630,253 +1599,143 @@
 
   <!-- 6 · THE DAY -->
   <div class="page p6" data-label="The Day">
-    <!-- F1 Car Blueprint SVG — ghost layer -->
-    <svg class="p6-car" viewBox="0 0 1400 280" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round">
-      <!-- Front wing -->
-      <path stroke-width="1.8" d="M 18,193 L 250,188"/>
-      <path stroke-width="1" d="M 30,200 L 248,196"/>
-      <path stroke-width="0.8" d="M 22,206 L 246,202"/>
-      <line stroke-width="1.2" x1="18" y1="190" x2="20" y2="218"/>
-      <line stroke-width="0.8" x1="155" y1="188" x2="156" y2="197"/>
-      <line stroke-width="0.8" x1="110" y1="190" x2="111" y2="200"/>
-      <!-- Nose cone -->
-      <path stroke-width="2.2" d="M 20,191 C 45,186 130,172 230,160 L 345,152"/>
-      <!-- Main body upper profile -->
-      <path stroke-width="2.2" d="M 345,152 C 390,148 435,144 468,138 L 515,126 C 534,120 562,118 592,122 L 645,126 C 710,130 768,136 830,139 L 1010,147 C 1048,149 1072,155 1085,162"/>
-      <!-- Cockpit surround -->
-      <path stroke-width="1.4" d="M 486,138 L 496,158 L 586,158 L 594,138"/>
-      <!-- Halo arch -->
-      <path stroke-width="1.8" d="M 490,134 C 494,112 514,104 538,103 C 562,103 580,112 584,134"/>
-      <line stroke-width="1.2" x1="537" y1="103" x2="537" y2="122"/>
-      <!-- Airbox intake -->
-      <path stroke-width="1" d="M 538,103 C 543,90 554,83 567,83 C 580,83 590,90 595,103"/>
-      <!-- Floor / lower body line -->
-      <path stroke-width="1.8" d="M 248,204 L 985,204"/>
-      <!-- Sidepod upper box -->
-      <path stroke-width="1" d="M 648,126 L 648,168 C 660,172 720,174 820,172 L 940,168 C 970,166 985,160 978,155"/>
-      <!-- Diffuser rear underbody -->
-      <path stroke-width="1.4" d="M 985,204 C 1018,204 1050,198 1068,186 L 1078,170"/>
-      <!-- Rear body close -->
-      <path stroke-width="2" d="M 1085,162 C 1074,164 1062,172 1050,182 L 1038,192"/>
-      <!-- Front wheel -->
-      <circle stroke-width="2" cx="258" cy="215" r="58"/>
-      <circle stroke-width="0.8" cx="258" cy="215" r="38"/>
-      <circle stroke-width="0.5" cx="258" cy="215" r="16"/>
-      <line stroke-width="0.5" x1="258" y1="157" x2="258" y2="273"/>
-      <line stroke-width="0.5" x1="200" y1="215" x2="316" y2="215"/>
-      <line stroke-width="0.5" x1="217" y1="174" x2="299" y2="256"/>
-      <line stroke-width="0.5" x1="299" y1="174" x2="217" y2="256"/>
-      <!-- Front suspension -->
-      <line stroke-width="1" x1="258" y1="158" x2="345" y2="165"/>
-      <line stroke-width="0.7" x1="258" y1="215" x2="345" y2="188"/>
-      <!-- Rear wheel -->
-      <circle stroke-width="2.2" cx="1002" cy="210" r="64"/>
-      <circle stroke-width="0.9" cx="1002" cy="210" r="42"/>
-      <circle stroke-width="0.5" cx="1002" cy="210" r="17"/>
-      <line stroke-width="0.5" x1="1002" y1="146" x2="1002" y2="274"/>
-      <line stroke-width="0.5" x1="938" y1="210" x2="1066" y2="210"/>
-      <line stroke-width="0.5" x1="956" y1="165" x2="1048" y2="255"/>
-      <line stroke-width="0.5" x1="1048" y1="165" x2="956" y2="255"/>
-      <!-- Rear suspension -->
-      <line stroke-width="1" x1="1002" y1="147" x2="960" y2="160"/>
-      <line stroke-width="0.7" x1="1002" y1="210" x2="965" y2="183"/>
-      <!-- Rear wing strut -->
-      <line stroke-width="1.8" x1="1062" y1="162" x2="1062" y2="112"/>
-      <!-- Rear wing elements -->
-      <path stroke-width="1.8" d="M 988,109 L 1148,109"/>
-      <path stroke-width="1.2" d="M 994,117 L 1142,117"/>
-      <path stroke-width="0.8" d="M 998,124 L 1138,124"/>
-      <!-- Rear wing endplates -->
-      <line stroke-width="1.2" x1="988" y1="107" x2="990" y2="130"/>
-      <line stroke-width="1.2" x1="1146" y1="107" x2="1144" y2="130"/>
-      <!-- Beam wing -->
-      <path stroke-width="0.8" d="M 1022,148 L 1100,148"/>
-      <!-- Engine cover centerline detail -->
-      <path stroke-width="0.4" stroke-dasharray="6,6" d="M 640,126 C 730,122 840,126 920,132"/>
-      <!-- Annotation dashed leaders -->
-      <line stroke-width="0.4" stroke-dasharray="3,5" x1="537" y1="83" x2="620" y2="42"/>
-      <line stroke-width="0.4" stroke-dasharray="3,5" x1="1062" y1="109" x2="1180" y2="72"/>
-      <line stroke-width="0.4" stroke-dasharray="3,5" x1="20" y1="198" x2="12" y2="252"/>
-      <!-- Wheelbase dimension line -->
-      <line stroke-width="0.4" x1="258" y1="270" x2="1002" y2="270"/>
-      <line stroke-width="0.6" x1="258" y1="265" x2="258" y2="278"/>
-      <line stroke-width="0.6" x1="1002" y1="265" x2="1002" y2="278"/>
-    </svg>
-
-    <!-- Corner spec block -->
-    <div class="p6-corner">
-      <div class="p6-corner__row"><span class="p6-corner__label">Project</span><span class="p6-corner__val">F1 Experience</span></div>
-      <div class="p6-corner__row"><span class="p6-corner__label">Rev</span><span class="p6-corner__val">01</span></div>
-      <div class="p6-corner__row"><span class="p6-corner__label">Status</span><span class="p6-corner__val">Ready to Race</span></div>
-    </div>
-
-    <!-- Left measurement ruler -->
-    <div class="p6-ruler">
-      <div class="p6-ruler__mark">000</div>
-      <div class="p6-ruler__mark">100</div>
-      <div class="p6-ruler__mark">200</div>
-      <div class="p6-ruler__mark">300</div>
-      <div class="p6-ruler__mark">400</div>
-      <div class="p6-ruler__mark">500</div>
-    </div>
-
-    <!-- Scattered technical atmosphere labels -->
-    <div class="p6-tech" style="bottom:100px;right:58px;text-align:right;">
-      <span class="p6-tech__key">Chassis</span>
-      <span class="p6-tech__val">Carbon Fiber</span>
-    </div>
-    <div class="p6-tech" style="bottom:64px;right:108px;text-align:right;">
-      <span class="p6-tech__key">Aerodynamics</span>
-      <span class="p6-tech__val">CFD Tested</span>
-    </div>
-    <div class="p6-tech" style="top:195px;right:52px;text-align:right;">
-      <span class="p6-tech__key">Downforce</span>
-      <span class="p6-tech__val">Max</span>
-    </div>
-    <div class="p6-tech" style="top:260px;right:82px;text-align:right;">
-      <span class="p6-tech__key">DRS</span>
-      <span class="p6-tech__val">Active</span>
-    </div>
-
-    <!-- Document stamp -->
-    <div class="p6-stamp">
-      <div><span class="p6-stamp__label">Document</span><span class="p6-stamp__val">Race Itinerary</span></div>
-      <div><span class="p6-stamp__label">Classification</span><span class="p6-stamp__val">Confidential</span></div>
-      <div><span class="p6-stamp__label">Location</span><span class="p6-stamp__val">Austin, Texas</span></div>
-    </div>
-
+    <div class="p6-bg"></div>
     <div class="p6__inner">
+
       <!-- Header -->
-      <div class="p6-header">
-        <div class="p6-eyebrow">Weekend Operations Blueprint · Thursday · Oct 22 · Austin, Texas</div>
-        <div class="p6-rule"></div>
-        <h2 class="p6-title">Race Command</h2>
-        <div class="p6-rule p6-rule--red"></div>
+      <div class="ef-header">
+        <span class="ef-header__title">📅 Event Flow:</span>
+        <span class="ef-header__sub">Thursday · Oct 22 · Austin, TX</span>
       </div>
 
-      <!-- Event flow -->
-      <div class="p6-flow">
-
-        <!-- ANCHOR: Community Warm-Up -->
-        <div class="p6-anchor">
-          <div class="p6-anchor__left">
-            <span class="p6-anchor__time">10:00</span>
-            <span class="p6-anchor__arrow">──────►</span>
-            <span class="p6-anchor__title">Community Warm-Up</span>
-          </div>
-          <div class="p6-anchor__logos">
-            <img class="p6-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
-            <img class="p6-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.equinox.com&size=64" alt="Equinox">
-            <img class="p6-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nutrabolt.com&size=64" alt="Nutrabolt">
-            <img class="p6-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://hyperice.com&size=64" alt="Hyperice">
+      <!-- ANCHOR 1: Community Warm-Up -->
+      <div class="ef-anchor">
+        <span class="ef-anchor__icon">🏃</span>
+        <div class="ef-anchor__body">
+          <span class="ef-anchor__time">10:00 AM</span>
+          <span class="ef-anchor__name">Community Warm-Up</span>
+          <div class="ef-anchor__logos">
+            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
+            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://hyperice.com&size=64" alt="Hyperice">
+            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.equinox.com&size=64" alt="Equinox">
+            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nutrabolt.com&size=64" alt="Nutrabolt">
           </div>
         </div>
-
-        <!-- BRANDS track -->
-        <div class="p6-track">
-          <div class="p6-track__label">Brands</div>
-          <div class="p6-track__panels">
-            <div class="p6-panel">
-              <span class="p6-panel__num">MOD 01</span>
-              <span class="p6-panel__time">9:45</span>
-              <span class="p6-panel__arrow">────►</span>
-              <div class="p6-panel__content">
-                <div class="p6-panel__title">The New Brand Blueprint</div>
-                <div class="p6-panel__desc">How wellness &amp; performance brands break into sports culture</div>
-              </div>
-              <div class="p6-panel__targets">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nike.com&size=64" alt="Nike">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.whoop.com&size=64" alt="WHOOP">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://hyperice.com&size=64" alt="Hyperice">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.drinkpoppi.com&size=64" alt="Poppi">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nutrabolt.com&size=64" alt="Nutrabolt">
-              </div>
-            </div>
-            <div class="p6-panel">
-              <span class="p6-panel__num">MOD 02</span>
-              <span class="p6-panel__time">10:30</span>
-              <span class="p6-panel__arrow">────►</span>
-              <div class="p6-panel__content">
-                <div class="p6-panel__title">The Performance Platform</div>
-                <div class="p6-panel__desc">How teams &amp; performance brands partner to push human potential</div>
-              </div>
-              <div class="p6-panel__targets">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.austinfc.com&size=64" alt="Austin FC">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nutrabolt.com&size=64" alt="Nutrabolt">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.whoop.com&size=64" alt="WHOOP">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ANCHOR: Padel & Lunch -->
-        <div class="p6-anchor">
-          <div class="p6-anchor__left">
-            <span class="p6-anchor__time">1:00</span>
-            <span class="p6-anchor__arrow">──────►</span>
-            <span class="p6-anchor__title">Padel w/ The Pros &amp; Lunch</span>
-          </div>
-          <div class="p6-anchor__logos">
-            <img class="p6-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.lovb.com&size=64" alt="LOVB">
-            <img class="p6-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
-            <img class="p6-anchor__logo" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124022/willpower/logos/brand-cadillac-f1-logo.png" alt="Cadillac" style="filter:invert(1);mix-blend-mode:screen;">
-            <img class="p6-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://texassports.com&size=64" alt="Longhorns">
-            <img class="p6-anchor__logo" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124129/willpower/logos/brand-formula1-logo.svg" alt="F1">
-          </div>
-        </div>
-
-        <!-- PERFORMANCE track -->
-        <div class="p6-track">
-          <div class="p6-track__label">Performance</div>
-          <div class="p6-track__panels">
-            <div class="p6-panel">
-              <span class="p6-panel__num">MOD 03</span>
-              <span class="p6-panel__time">2:30</span>
-              <span class="p6-panel__arrow">────►</span>
-              <div class="p6-panel__content">
-                <div class="p6-panel__title">High Stress Cognitive Performance</div>
-                <div class="p6-panel__desc">Cognitive performance on the battlefield, racetrack &amp; championship game</div>
-              </div>
-              <div class="p6-panel__targets">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://texassports.com&size=64" alt="Longhorns">
-                <img class="p6-panel__tlogo" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124022/willpower/logos/brand-cadillac-f1-logo.png" alt="Cadillac" style="filter:invert(1);mix-blend-mode:screen;">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nasa.gov&size=64" alt="NASA">
-              </div>
-            </div>
-            <div class="p6-panel">
-              <span class="p6-panel__num">MOD 04</span>
-              <span class="p6-panel__time">3:15</span>
-              <span class="p6-panel__arrow">────►</span>
-              <div class="p6-panel__content">
-                <div class="p6-panel__title">American Performance</div>
-                <div class="p6-panel__desc">Sports, defense &amp; wellness leaders shaping the future of American performance</div>
-              </div>
-              <div class="p6-panel__targets">
-                <img class="p6-panel__tlogo" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124022/willpower/logos/brand-cadillac-f1-logo.png" alt="Cadillac" style="filter:invert(1);mix-blend-mode:screen;">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.anduril.com&size=64" alt="Anduril">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.palantir.com&size=64" alt="Palantir">
-                <img class="p6-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ANCHOR: Padel & Chill -->
-        <div class="p6-anchor">
-          <div class="p6-anchor__left">
-            <span class="p6-anchor__time">4:00</span>
-            <span class="p6-anchor__arrow">──────►</span>
-            <span class="p6-anchor__title">Padel &amp; Chill</span>
-          </div>
-          <div class="p6-anchor__logos">
-            <img class="p6-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://hyperice.com&size=64" alt="Hyperice">
-            <img class="p6-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.plunge.com&size=64" alt="Plunge">
-          </div>
-        </div>
-
+        <span class="ef-anchor__icon">🏃</span>
       </div>
+
+      <!-- BRANDS section -->
+      <div class="ef-section ef-section--brands">
+        <div class="ef-section__vtag">Brands</div>
+        <div class="ef-section__panels">
+
+          <div class="ef-panel">
+            <div class="ef-panel__main">
+              <div class="ef-panel__time">9:45 AM</div>
+              <div class="ef-panel__title">The New Brand Blueprint</div>
+              <div class="ef-panel__desc">How wellness &amp; performance brands break into sports culture</div>
+            </div>
+            <div class="ef-panel__right">
+              <div class="ef-panel__tgrid">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nike.com&size=64" alt="Nike">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.whoop.com&size=64" alt="WHOOP">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://hyperice.com&size=64" alt="Hyperice">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.drinkpoppi.com&size=64" alt="Poppi">
+              </div>
+              <div class="ef-targets-vtag">Targets</div>
+            </div>
+          </div>
+
+          <div class="ef-panel">
+            <div class="ef-panel__main">
+              <div class="ef-panel__time">10:30 AM</div>
+              <div class="ef-panel__title">The Performance Platform</div>
+              <div class="ef-panel__desc">How teams &amp; performance brands partner to push human potential</div>
+            </div>
+            <div class="ef-panel__right">
+              <div class="ef-panel__tgrid">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.austinfc.com&size=64" alt="Austin FC">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nutrabolt.com&size=64" alt="Nutrabolt">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.whoop.com&size=64" alt="WHOOP">
+              </div>
+              <div class="ef-targets-vtag">Targets</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ANCHOR 2: Padel w/ The Pros & Lunch -->
+      <div class="ef-anchor">
+        <span class="ef-anchor__icon">🥎</span>
+        <div class="ef-anchor__body">
+          <span class="ef-anchor__time">1:00 PM</span>
+          <span class="ef-anchor__name">Padel w/ The Pros &amp; Lunch</span>
+          <div class="ef-anchor__logos">
+            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.lovb.com&size=64" alt="LOVB">
+            <span style="font-family:var(--cond);font-size:8px;font-weight:800;letter-spacing:.06em;color:rgba(255,255,255,.75);white-space:nowrap;">TEXAS RANCHERS</span>
+            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
+            <img class="ef-anchor__logo ef-anchor__logo--inv" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124022/willpower/logos/brand-cadillac-f1-logo.png" alt="Cadillac">
+            <img class="ef-anchor__logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://texassports.com&size=64" alt="Longhorns">
+            <img class="ef-anchor__logo" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124129/willpower/logos/brand-formula1-logo.svg" alt="F1">
+          </div>
+        </div>
+        <span class="ef-anchor__icon">🥎</span>
+      </div>
+
+      <!-- PERFORMANCE section -->
+      <div class="ef-section ef-section--perf">
+        <div class="ef-section__vtag">Performance</div>
+        <div class="ef-section__panels">
+
+          <div class="ef-panel">
+            <div class="ef-panel__main">
+              <div class="ef-panel__time">2:30 PM</div>
+              <div class="ef-panel__title">High Stress Cognitive Perf.</div>
+              <div class="ef-panel__desc">Battlefield, racetrack &amp; championship game — improving cognition under pressure</div>
+            </div>
+            <div class="ef-panel__right">
+              <div class="ef-panel__tgrid">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://texassports.com&size=64" alt="Longhorns">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.austinfc.com&size=64" alt="Austin FC">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nasa.gov&size=64" alt="NASA">
+              </div>
+              <div class="ef-targets-vtag">Targets</div>
+            </div>
+          </div>
+
+          <div class="ef-panel">
+            <div class="ef-panel__main">
+              <div class="ef-panel__time">3:15 PM</div>
+              <div class="ef-panel__title">American Performance</div>
+              <div class="ef-panel__desc">Sports, defense &amp; wellness leaders shaping American performance &amp; ingenuity</div>
+            </div>
+            <div class="ef-panel__right">
+              <div class="ef-panel__tgrid">
+                <img class="ef-panel__tlogo ef-panel__tlogo--inv" src="https://res.cloudinary.com/dtweaijj1/image/upload/v1783124022/willpower/logos/brand-cadillac-f1-logo.png" alt="Cadillac">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.anduril.com&size=64" alt="Anduril">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.palantir.com&size=64" alt="Palantir">
+                <img class="ef-panel__tlogo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.nba.com/spurs&size=64" alt="Spurs">
+              </div>
+              <div class="ef-targets-vtag">Targets</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ANCHOR 3: Padel & Chill -->
+      <div class="ef-anchor ef-anchor--chill">
+        <img class="ef-chill-logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://hyperice.com&size=64" alt="Hyperice">
+        <div class="ef-anchor__body">
+          <span class="ef-anchor__time">4:00 PM</span>
+          <span class="ef-anchor__name">Padel &amp; Chill</span>
+        </div>
+        <img class="ef-chill-logo" src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.plunge.com&size=64" alt="Plunge">
+      </div>
+
     </div>
   </div>
 
