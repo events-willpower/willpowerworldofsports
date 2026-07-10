@@ -699,19 +699,23 @@
     }
     /* Divider line between the itinerary schedule and the activations section */
     .itin-native > div[style*="margin-top:16px"][style*="flex-shrink:0"] {
-      border-top: 1px solid rgba(255,255,255,0.12) !important;
-      padding-top: 20px !important;
-      margin-top: 24px !important;
+      border-top: 2px solid rgba(255,255,255,0.45) !important;
+      padding-top: 24px !important;
+      margin-top: 28px !important;
     }
     @media (max-width: 1080px) {
       .p-itinerary { overflow-y: auto !important; align-items: flex-start !important; justify-content: flex-start !important; }
       .itin-native { padding: 28px 14px 48px !important; }
 
-      /* Keep the two schedule columns side by side (morning | afternoon) */
+      /* Stack the whole schedule into a single-column list */
       .itin-native > div[style*="position:relative;display:flex;gap:16px"] {
-        flex-direction: row !important;
-        gap: 12px !important;
+        flex-direction: column !important;
+        gap: 10px !important;
         align-items: stretch !important;
+      }
+      .itin-native > div[style*="position:relative;display:flex;gap:16px"] > div {
+        flex: none !important;
+        gap: 10px !important;
       }
 
       /* Session rows: stack the logo cluster onto its own line below the text
